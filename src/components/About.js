@@ -5,10 +5,7 @@ const About = () => {
         <div>
             <h1>About</h1>
             <p>This is about us...</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Tempore dolorum excepturi, pariatur dolore fuga perferendis 
-                mollitia deserunt a voluptas assumenda! Consequatur beatae qui 
-                dolorem tempora possimus accusantium, fugit eius quidem?
+            <p>We wanted to make an everyday tracker for your finances. A quick and interactional App that can show you how your personalized goals are going with a weekly or monthly update. We have intuitive graphs and tables to make it easy and fun to show your progress and SetAside.  
             </p>
         </div>
     )
