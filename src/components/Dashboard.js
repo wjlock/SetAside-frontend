@@ -3,7 +3,7 @@ import { PieChart } from 'react-minimal-pie-chart';
  const Dashboard = () => {
      return(
          
-        <PieChart
+        <PieChart className="pie-chart"
         data={[
             { title: 'One', value: 10, color: '#E38627' },
             { title: 'Two', value: 15, color: '#C13C37' },

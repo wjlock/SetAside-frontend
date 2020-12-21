@@ -19,3 +19,9 @@ th {
 .expense-input {
   width: 65px;
 }
+
+.pie-chart{
+  height: 300px;
+  width: 300px;
+  position: relative;
+}
