@@ -19,7 +19,10 @@ const Expense = () => {
           <th>Sept</th>
           <th>Oct</th>
           <th>Nov</th>
-          <th>Dev</th>
+          <th>Dec</th>
+        </tr>
+        <tr>
+          <th>Home Expenses</th>
         </tr>
         <tr>
           <th>Rent/Mortgage</th>
