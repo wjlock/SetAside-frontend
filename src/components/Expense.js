@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Expense = () => {
+  const [janRent, setJanRent] = useState(0);
+  const [febRent, setFebRent] = useState(0);
+  const [marRent, setMarRent] = useState(0);
   return (
     <div>
       <h2>Expenses</h2>
@@ -27,13 +30,37 @@ const Expense = () => {
         <tr>
           <th>Rent/Mortgage</th>
           <td>
-            <input type="number" class="expense-input"></input>
+            <label htmlFor="janRent"></label>
+            <input
+              type="number"
+              className="expense-input"
+              name="janRent"
+              id="janRent"
+              value={(janRent, console.log(janRent))}
+              onChange={(e) => setJanRent(e.target.value)}
+            />
           </td>
           <td>
-            <input type="number" class="expense-input"></input>
+            <label htmlFor="febRent"></label>
+            <input
+              type="number"
+              className="expense-input"
+              name="febRent"
+              id="febRent"
+              value={(febRent, console.log(febRent))}
+              onChange={(e) => setFebRent(e.target.value)}
+            />
           </td>
           <td>
-            <input type="number" class="expense-input"></input>
+            <label htmlFor="marRent"></label>
+            <input
+              type="number"
+              className="expense-input"
+              name="marRent"
+              id="marRent"
+              value={(marRent, console.log(marRent))}
+              onChange={(e) => setMarRent(e.target.value)}
+            />
           </td>
           <td>
             <input type="number" class="expense-input"></input>
