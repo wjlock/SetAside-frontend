@@ -7,7 +7,6 @@ const ExpenseBreakdown = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // NEED GET ROUTE
   };
   return (
     <div>
@@ -48,6 +47,9 @@ const ExpenseBreakdown = () => {
         </tr>
         <tr>
           <th>Rent/Mortgage</th>
+          <td>MTD</td>
+          <td>BUDGETED</td>
+          <td>SURPLUS/OVERAGES</td>
         </tr>
         <tr>
           <th>Utilities</th>
