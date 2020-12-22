@@ -12,6 +12,12 @@ const Signup = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
+    const [phone, setPhone] = useState('');
+    const [income, setIncome] = useState('');
+    const [savings, setSavings] = useState('');
+    const [currentAccount, setCurrentAccount] = useState('');
+    
+
 
     const handleName = (e) => {
         setName(e.target.value);
@@ -19,6 +25,19 @@ const Signup = () => {
 
     const handleEmail = (e) => {
         setEmail(e.target.value);
+    }
+    const handlePhone = (e) => {
+        setPhone(e.target.value);
+    }
+    const handleSavings = (e) => {
+        setSavings(e.target.value);
+    }
+    const handleIncome = (e) => {
+        setIncome(e.target.value);
+    }
+
+    const handleCurrentAccount = (e) => {
+        setCurrentAccount(e.target.value);
     }
 
     const handlePassword = (e) => {
@@ -68,6 +87,22 @@ const Signup = () => {
                         <div className="form-group">
                             <label htmlFor="confirmPassword">Confirm Password</label>
                             <input type="password" name="confirmPassword" value={confirmPassword} onChange={handleConfirmPassword} className="form-control" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="phone">Phone number</label>
+                            <input type="number" name="phone" value={phone} onChange={handlePhone} className="form-control" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="income">Income</label>
+                            <input type="number" name="income" value={income} onChange={handleIncome} className="form-control" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="savings">Savings goals</label>
+                            <input type="number" name="savings" value={savings} onChange={handleSavings} className="form-control" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="account">Current Account Status (Balance & Savings)</label>
+                            <input type="number" name="account" value={currentAccount} onChange={handleCurrentAccount} className="form-control" />
                         </div>
                         <button type="submit" className="btn btn-primary float-right">Submit</button>
                     </form>
