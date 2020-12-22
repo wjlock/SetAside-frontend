@@ -13,6 +13,7 @@ import Profile from "./components/Profile";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import About from "./components/About";
+import ExpenseEntry from "./components/ExpenseEntry";
 import Expense from "./components/Expense";
 import Dashboard from "./components/Dashboard";
 import Blogpost from "./components/Blogpost";
@@ -88,6 +89,7 @@ function App() {
             user={currentUser}
           />
           <Route exact path="/" component={Welcome} />
+          <Route exact path="/expenseentry" component={ExpenseEntry} />
           <Route exact path="/expense" component={Expense} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/blogpost" component={Blogpost} />
