@@ -17,6 +17,7 @@ import ExpenseEntry from "./components/ExpenseEntry";
 import Dashboard from "./components/Dashboard";
 import Blogpost from "./components/Blogpost";
 import Blog from "./components/Blog";
+import ExpenseBreakdown from "./components/ExpenseBreakdown";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const user = localStorage.getItem("jwtToken");
@@ -93,6 +94,8 @@ function App() {
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/newblogpost" component={Blogpost} />
           <Route exact path="/blog" component={Blog} />
+          <Route exact path="/blogpost" component={Blogpost} />
+          <Route exact path="/expensebreakdown" component={ExpenseBreakdown} />
         </Switch>
       </div>
       <Footer />

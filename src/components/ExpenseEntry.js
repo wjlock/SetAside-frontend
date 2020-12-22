@@ -225,6 +225,7 @@ const ExpenseEntry = () => {
   // const [expenseName, setExpenseName] = useState("");
   // const [expenseMonth, setExpenseMonth] = useState("");
   const [expenseYear, setExpenseYear] = useState("");
+  const [expenseAmount, setExpenseAmount] = useState("");
 
   // const handleCategory = (e) => {
   //   setCategory(e.target.value);
@@ -240,6 +241,10 @@ const ExpenseEntry = () => {
 
   const handleExpenseYear = (e) => {
     setExpenseYear(e.target.value);
+  };
+
+  const handleExpenseAmount = (e) => {
+    setExpenseAmount(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -289,6 +294,14 @@ const ExpenseEntry = () => {
           value={expenseYear}
           onChange={handleExpenseYear}
         ></input>
+        <label for="expenseAmount">How much did you spend?</label>
+        <input
+          type="number"
+          name="expenseAmount"
+          value={expenseAmount}
+          onChange={handleExpenseAmount}
+        ></input>
+
         <button type="submit">Add Expense</button>
       </form>
     </div>
