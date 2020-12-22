@@ -29,7 +29,20 @@ const ExpenseEntry = (props) => {
     setExpenseMonth(e.target.value);
   };
 
-  const handleSubmit = (req, res) => {};
+  const handleSubmit = () => {
+    fetch('http://localhost:8000/api/expenses/new', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    }).then((res) => {
+      res.json().then((json) => {
+        this.props.reload()
+        this.props.history.push(`/show/${json.expense._id}`)
+      })
+    })
+  }
 
   return (
     <div>

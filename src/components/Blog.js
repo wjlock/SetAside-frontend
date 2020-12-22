@@ -37,7 +37,13 @@ class Blog extends Component {
         <p> Author: {blog.author}</p>
         <p>{blog.content}</p>
         <p>Comments:</p>
-        <ul>{blog.comments}</ul>
+        <ul>
+          {blog.comments.length > 0 ? (
+            blog.comments.map((c, k) => <li key={key}>{c}</li>)
+          ) : (
+            <li>No comments.</li>
+          )}
+        </ul>
       </div>
     ));
   }
