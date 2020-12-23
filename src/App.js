@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
+
 // CSS
 import "./App.css";
 // Components
@@ -15,7 +16,7 @@ import Login from "./components/Login";
 import About from "./components/About";
 import ExpenseEntry from "./components/ExpenseEntry";
 import Dashboard from "./components/Dashboard";
-import DailyExpenses from "./components/DailyExpenses";
+import Budget from "./components/Budget";
 import Blogpost from "./components/Blogpost";
 
 
@@ -92,7 +93,7 @@ function App() {
           <Route exact path="/" component={Welcome} />
           <Route exact path="/expenseentry" component={ExpenseEntry} />
           <Route exact path="/dashboard" component={Dashboard} />
-          <Route path='/dailyexpenses' component={DailyExpenses} />
+          <Route path='/budget' component={Budget} />
           <Route exact path="/blogpost" component={Blogpost} />
         </Switch>
       </div>
