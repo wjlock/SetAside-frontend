@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const ExpenseEntry = (props) => {
+  
   const [expenseYear, setExpenseYear] = useState("");
   const [expenseAmount, setExpenseAmount] = useState("");
   const [expenseDay, setExpenseDay] = useState("");
@@ -30,21 +31,24 @@ const ExpenseEntry = (props) => {
     setExpenseMonth(e.target.value);
   };
 
-  // If category === other, show an input field for expenseName. Else, show dropdown field for name
-  // If category === home, show only home epxenses
-  // if category === daily living, show only daily living epxenses
-  // etc
-  // const handleVision = () => {
-  //   console.log(expenseCategory);
-  // };
-
-  const handleSubmit = () => {
-    fetch("http://localhost:8000/api/expenses/new", {
-      method: "POST",
+  const handleSubmit = (evt) => {
+    evt.preventDefault()
+    console.log('test')
+    const data = {
+      year: expenseYear,
+      amount: expenseAmount,
+      day: expenseDay,
+      category: expenseCategory,
+      name: expenseName,
+      month: expenseMonth
+    }
+    console.log(data)
+    fetch('http://localhost:8000/api/expenses/new', {
+      method: 'POST',
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(this.state),
+      body: JSON.stringify(data)
     }).then((res) => {
       res.json().then((json) => {
         this.props.reload();
@@ -97,7 +101,7 @@ const ExpenseEntry = (props) => {
       <div>
         <h1>Enter an expense</h1>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <label htmlFor="expenseCategory">Choose a category</label>
         <select
           name="expenseCategoryDropdown"
@@ -167,7 +171,7 @@ const ExpenseEntry = (props) => {
           onChange={handleExpenseAmount}
         ></input>
 
-        <button type="submit">Add Expense</button>
+        <button type="submit" onClick={handleSubmit}>Add Expense</button>
       </form>
     </div>
   );
