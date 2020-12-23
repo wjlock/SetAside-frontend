@@ -28,7 +28,7 @@ const Navbar = (props) => {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" exact to="/expenseentry">
-                Add a new expense
+                Add a New Expense
               </NavLink>
             </li>
             <li className="nav-item">
