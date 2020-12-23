@@ -4,7 +4,7 @@ const ExpenseEntry = (props) => {
   const [expenseYear, setExpenseYear] = useState("");
   const [expenseAmount, setExpenseAmount] = useState("");
   const [expenseDay, setExpenseDay] = useState("");
-  const [expenseCategory, setExpenseCategory] = useState("");
+  const [expenseCategory, setExpenseCategory] = useState("null");
   const [expenseName, setExpenseName] = useState("");
   const [expenseMonth, setExpenseMonth] = useState("");
 
@@ -14,6 +14,7 @@ const ExpenseEntry = (props) => {
 
   const handleExpenseAmount = (e) => {
     setExpenseAmount(e.target.value);
+    console.log(expenseAmount);
   };
 
   const handleExpenseDay = (e) => {
@@ -29,20 +30,67 @@ const ExpenseEntry = (props) => {
     setExpenseMonth(e.target.value);
   };
 
+  // If category === other, show an input field for expenseName. Else, show dropdown field for name
+  // If category === home, show only home epxenses
+  // if category === daily living, show only daily living epxenses
+  // etc
+  // const handleVision = () => {
+  //   console.log(expenseCategory);
+  // };
+
   const handleSubmit = () => {
-    fetch('http://localhost:8000/api/expenses/new', {
-      method: 'POST',
+    fetch("http://localhost:8000/api/expenses/new", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(this.state),
     }).then((res) => {
       res.json().then((json) => {
-        this.props.reload()
-        this.props.history.push(`/show/${json.expense._id}`)
-      })
-    })
-  }
+        this.props.reload();
+        this.props.history.push(`/show/${json.expense._id}`);
+      });
+    });
+  };
+
+  // logic for dropdowns here
+  const categories = {
+    home: ["Mortgage/Rent", "Utilities", "Phone", "Internet", "Insurance"],
+    daily: [
+      "Groceries",
+      "Child Care",
+      "Dry Cleaning",
+      "Child Care",
+      "House Cleaning",
+      "Pet Care",
+    ],
+    transportation: [
+      "Gas",
+      "Car Insurance",
+      "Repairs",
+      "Car Wash",
+      "Parking",
+      "Public Transporation",
+      "Taxi/Uber",
+    ],
+    entertainment: ["Cable", "Movies", "Concerts", "Misc"],
+  };
+
+  const categoryKeys = Object.keys(categories);
+  // categories accessed at whatever key
+  //map keys into option tags
+  //pop value and UI
+
+  const createCats = categoryKeys.map(function (category) {
+    return <option value={category}>{category}</option>;
+  });
+
+  const namesList = categories[expenseCategory];
+  console.log(namesList);
+
+  const createNames = namesList?.map(function (name) {
+    return <option value={name}>{name}</option>;
+  });
 
   return (
     <div>
@@ -52,15 +100,13 @@ const ExpenseEntry = (props) => {
       <form onSubmit={handleSubmit}>
         <label htmlFor="expenseCategory">Choose a category</label>
         <select
-          name="expenseCategory"
-          id="expenseCategory"
+          name="expenseCategoryDropdown"
+          className="expenseCategoryDropdown"
+          id="expenseCategoryDropdown"
           form="categoryForm"
           onChange={handleExpenseCategory}
         >
-          <option value={expenseCategory}>Home</option>
-          <option value={expenseCategory}>Daily Living</option>
-          <option value={expenseCategory}>Transportation</option>
-          <option value={expenseCategory}>Entertainment</option>
+          {createCats}
         </select>
         <label htmlFor="expenseName">Choose a name</label>
         <select
@@ -69,10 +115,11 @@ const ExpenseEntry = (props) => {
           form="nameForm"
           onChange={handleExpenseName}
         >
-          <option value={expenseName}>Rent/Mortgage</option>
+          {createNames}
+          {/* <option value="placeholder">Rent/Mortgage</option>
           <option value={expenseName}>Groceries</option>
           <option value={expenseName}>Gas</option>
-          <option value={expenseName}>Cable/Internet</option>
+          <option value={expenseName}>Cable/Internet</option> */}
         </select>
         <label htmlFor="expenseDay">What day?</label>
         <input
