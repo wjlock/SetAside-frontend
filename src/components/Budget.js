@@ -7,10 +7,11 @@ import { Redirect } from 'react-router-dom';
 const Budget = () => {
 const [funds, setFunds] = useState({
   utilities: 0,
-  bills: 0,
+  rent: 0,
   food: 0,
   savings: 0,
   personal: 0,
+  bills: 0
 }) 
 const [redirect, setRedirect] = useState(false)
 const handleChange = (e) => {
@@ -50,8 +51,8 @@ const handleChange = (e) => {
                     <h2 className="py-2">Set Budget</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label htmlFor="name">Rent/Mortgage</label>
-                            {/* <input type="text" name="name" value={name} onChange={handleName} className="form-control" /> */}
+                            <label htmlFor="number">Rent/Mortgage</label>
+                            <input type="number" name="rent" value={funds.rent} onChange={handleChange} className="form-control" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="number">Utilities</label>

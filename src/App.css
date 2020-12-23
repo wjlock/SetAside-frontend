@@ -24,7 +24,7 @@ th {
   height: 300px;
   width: 300px;
   position: relative;
-  padding-top: 10px;
+  padding-top: 15px;
 }
 
 /* .progress{
@@ -33,4 +33,14 @@ th {
 
 .blogPost {
   text-align: center;
+}
+.about{
+  text: center;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.intro{
+  text: center;
+  margin-left: 50px;
+  margin-right: 50px;
 }
