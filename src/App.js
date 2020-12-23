@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
+
 // CSS
 import "./App.css";
 // Components
@@ -15,9 +16,9 @@ import Login from "./components/Login";
 import About from "./components/About";
 import ExpenseEntry from "./components/ExpenseEntry";
 import Dashboard from "./components/Dashboard";
+import Budget from "./components/Budget";
 import Blogpost from "./components/Blogpost";
-import Blog from "./components/Blog";
-import ExpenseBreakdown from "./components/ExpenseBreakdown";
+
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const user = localStorage.getItem("jwtToken");
@@ -34,12 +35,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     />
   );
 };
-
 function App() {
   // Set state values
   const [currentUser, setCurrentUser] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-
   useEffect(() => {
     let token;
     // if there is no token in localStorage, then the user is in authenticated
@@ -51,13 +50,11 @@ function App() {
       setCurrentUser(token);
     }
   }, []);
-
   const nowCurrentUser = (userData) => {
     console.log("nowCurentUser is here...");
     setCurrentUser(userData);
     setIsAuthenticated(true);
   };
-
   const handleLogout = () => {
     if (localStorage.getItem("jwtToken")) {
       localStorage.removeItem("jwtToken");
@@ -65,7 +62,6 @@ function App() {
       setIsAuthenticated(false);
     }
   };
-
   return (
     <div className="App">
       <Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />
@@ -92,15 +88,12 @@ function App() {
           <Route exact path="/" component={Welcome} />
           <Route exact path="/expenseentry" component={ExpenseEntry} />
           <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/newblogpost" component={Blogpost} />
-          <Route exact path="/blog" component={Blog} />
+          <Route path='/budget' component={Budget} />
           <Route exact path="/blogpost" component={Blogpost} />
-          <Route exact path="/expensebreakdown" component={ExpenseBreakdown} />
         </Switch>
       </div>
       <Footer />
     </div>
   );
 }
-
 export default App;
