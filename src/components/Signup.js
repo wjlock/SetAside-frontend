@@ -29,7 +29,6 @@ const Signup = () => {
         })
       }
 
-
     const handleName = (e) => {
         setName(e.target.value);
     }
@@ -65,8 +64,13 @@ const Signup = () => {
         if (password === confirmPassword) {
             const newUser = { name, email, password };
             
-            axios.post(`${REACT_APP_SERVER_URL}/api/users/register`, newUser)
-            .then(response => {
+            axios.post(`${REACT_APP_SERVER_URL}/api/users/register`, newUser,{
+                method: 'POST',
+                headers: {
+                    "Content-Type": "applicationa/json",
+                },
+                body: JSON.stringify(newUser),
+            }).then(response => {
                 console.log(response);
                 setRedirect(true);
             })
@@ -76,7 +80,7 @@ const Signup = () => {
         }
     }
 
-    if (redirect) return <Redirect to='/login' />
+    if (redirect) return <Redirect to='/profile' />
     return (
         <div className="row mt-4">
             <div className="col-md-7 offset-md-3">
@@ -121,7 +125,7 @@ const Signup = () => {
                             <label>Mortage/Rent</label>
                             <input type="number" name="home" value={funds.home} onChange={handleChange} className="form-control" />
                             <label>Utlities</label>
-                            <input type="number" name="home" value={funds.home} onChange={handleChange} className="form-control" />
+                            <input type="number" name="home" value={funds.ulities} onChange={handleChange} className="form-control" />
                             <label>Phone</label>
                             <input type="number" name="home" value={funds.home} onChange={handleChange} className="form-control" />
                             <label>Internet</label>
@@ -149,9 +153,9 @@ const Signup = () => {
                             <label htmlFor="number">Transportation</label>
                             <ol>
                             <label>Gas</label>
-                            <input type="number" name="transportation" value={funds.transportation} onChange={handleChange} className="form-control" />
+                            <input type="number" name="gas" value={funds.transportation} onChange={handleChange} className="form-control" />
                             <label>Car Insurance</label>
-                            <input type="number" name="transportation" value={funds.transportation} onChange={handleChange} className="form-control" />
+                            <input type="number" name="carInsurance" value={funds.transportation} onChange={handleChange} className="form-control" />
                             <label>Repairs</label>
                             <input type="number" name="transportation" value={funds.transportation} onChange={handleChange} className="form-control" />
                             <label>Car Wash</label>
