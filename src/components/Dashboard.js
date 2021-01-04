@@ -1,10 +1,12 @@
 import { PieChart } from 'react-minimal-pie-chart';
 import React, { Component } from 'react';
  
+
  class Dashboard extends Component {
+    
      render() {
      return(
-         //budget
+         //budget make it in range 
          //preset average value 
          <div>
              <div>
@@ -28,13 +30,22 @@ import React, { Component } from 'react';
         </div>
 
         {/* spending */}
-        <PieChart className="pie-chart"
+        <PieChart className="pie-chart" lineWidth="100" paddingAngle="3" 
         data={[
-            { title: 'One', value: 10, color: '#E38627' },
-            { title: 'Two', value: 15, color: '#C13C37' },
-            { title: 'Three', value: 20, color: '#6A2135' },
+            { title: 'One',
+                value: 33,
+                color: '#E38627'
+            },
+            { title: 'Two',
+                value: 33,
+                color: '#C13C37'
+            },
+            { title: 'Three',
+                value: 33,
+                color: '#6A2135' 
+            },
         ]}
-    
+        label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%'}
         />
         </div>
      )};}
