@@ -44,32 +44,26 @@ const ExpenseEntry = (props) => {
       name: expenseName,
       month: expenseMonth
     }
-    console.log(data)
+    // console.log(data)
     axios.post(`${REACT_APP_SERVER_URL}/api/expenses/new`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then((res) => {
-      res.json().then((json) => {
-        this.props.reload();
-        this.props.history.push(`/show/${json.expense._id}`);
-      });
+      data
+      }).then(res => {
+        console.log(res.data)
     });
   };
 
+
   // logic for dropdowns here
   const categories = {
-    home: ["Mortgage/Rent", "Utilities", "Phone", "Internet", "Insurance"],
-    daily: [
+    Home: ["Mortgage/Rent", "Utilities", "Phone", "Internet", "Insurance"],
+    Daily: [
       "Groceries",
       "Child Care",
       "Dry Cleaning",
       "House Cleaning",
       "Pet Care",
     ],
-    transportation: [
+    Transportation: [
       "Gas",
       "Car Insurance",
       "Repairs",
@@ -78,7 +72,7 @@ const ExpenseEntry = (props) => {
       "Public Transporation",
       "Taxi/Uber",
     ],
-    entertainment: ["Cable", "Movies", "Concerts", "Misc"],
+    Entertainment: ["Cable", "Movies", "Concerts", "Misc"],
   };
 
   const categoryKeys = Object.keys(categories);
@@ -137,27 +131,27 @@ const ExpenseEntry = (props) => {
           max="31"
           min="01"
         ></input>
-        <label htmlFor="expenseMonth">Choose a month</label>
+        <label htmlFor="expenseMonth">Choose a Month</label>
         <select
           name="expenseMonth"
           id="expenseMonth"
           form="monthForm"
           onChange={handleExpenseMonth}
         >
-          <option value={expenseMonth}>January</option>
-          <option value={expenseMonth}>February</option>
-          <option value={expenseMonth}>March</option>
-          <option value={expenseMonth}>April</option>
-          <option value={expenseMonth}>May</option>
-          <option value={expenseMonth}>June</option>
-          <option value={expenseMonth}>July</option>
-          <option value={expenseMonth}>August</option>
-          <option value={expenseMonth}>September</option>
-          <option value={expenseMonth}>October</option>
-          <option value={expenseMonth}>November</option>
-          <option value={expenseMonth}>December</option>
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
         </select>
-        <label htmlFor="expenseYear">Choose a year</label>
+        <label htmlFor="expenseYear">Choose a Year</label>
         <input
           type="number"
           name="expenseYear"

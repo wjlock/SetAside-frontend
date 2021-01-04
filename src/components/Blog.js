@@ -12,17 +12,14 @@ class Blog extends Component {
     };
   }
 
-  async componentDidMount() {
-    const response = await axios.get(`${REACT_APP_SERVER_URL}/api/blogPosts/all`);
-    const json = await response.json();
-    this.setState({ blogPost: json.blogPosts, finishedLoading: false });
-  }
 
-  reload = async () => {
-    const response = await axios.get(`${REACT_APP_SERVER_URL}/api/blogPosts/all`);
-    const json = await response.json();
-    this.setState({ blogPost: json.blogPosts, finishedLoading: true });
-  };
+  componentDidMount() {
+    axios.get(`${REACT_APP_SERVER_URL}/api/blogPosts/all`)
+      .then(res => {
+        const data = res.data;
+        this.setState({ blogPost: data.blogPosts });
+      })
+  }
 
   render() {
     if (this.state.blogPost.length === 0) {
