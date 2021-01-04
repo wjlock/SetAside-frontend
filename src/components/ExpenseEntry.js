@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const ExpenseEntry = (props) => {
-  
   const [expenseYear, setExpenseYear] = useState("");
   const [expenseAmount, setExpenseAmount] = useState("");
   const [expenseDay, setExpenseDay] = useState("");
@@ -32,23 +32,23 @@ const ExpenseEntry = (props) => {
   };
 
   const handleSubmit = (evt) => {
-    evt.preventDefault()
-    console.log('test')
+    evt.preventDefault();
+    console.log("test");
     const data = {
       year: expenseYear,
       amount: expenseAmount,
       day: expenseDay,
       category: expenseCategory,
       name: expenseName,
-      month: expenseMonth
-    }
-    console.log(data)
-    fetch('http://localhost:8000/api/expenses/new', {
-      method: 'POST',
+      month: expenseMonth,
+    };
+    console.log(data);
+    fetch(`${REACT_APP_SERVER_URL}/api/expenses/new`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     }).then((res) => {
       res.json().then((json) => {
         this.props.reload();
@@ -171,7 +171,9 @@ const ExpenseEntry = (props) => {
           onChange={handleExpenseAmount}
         ></input>
 
-        <button type="submit" onClick={handleSubmit}>Add Expense</button>
+        <button type="submit" onClick={handleSubmit}>
+          Add Expense
+        </button>
       </form>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 class Blog extends Component {
   constructor() {
@@ -6,18 +7,18 @@ class Blog extends Component {
 
     this.state = {
       blogPost: [],
-      finishedLoading: true
+      finishedLoading: true,
     };
   }
 
   async componentDidMount() {
-    const response = await fetch("http://localhost:8000/api/blogPosts/all");
+    const response = await fetch(`${REACT_APP_SERVER_URL}/api/blogPosts/all`);
     const json = await response.json();
     this.setState({ blogPost: json.blogPosts, finishedLoading: false });
   }
 
   reload = async () => {
-    const response = await fetch("http://localhost:8000/api/blogPosts/all");
+    const response = await fetch(`${REACT_APP_SERVER_URL}/api/blogPosts/all`);
     const json = await response.json();
     this.setState({ blogPost: json.blogPosts, finishedLoading: true });
   };
