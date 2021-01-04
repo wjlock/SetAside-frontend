@@ -73,7 +73,7 @@ const ExpenseEntry = (props) => {
       "Public Transporation",
       "Taxi/Uber",
     ],
-    Entertainment: ["Cable", "Movies", "Concerts", "Misc"],
+    Entertainment: ["Television", "Movies", "Concerts", "Misc"],
   };
 
   const categoryKeys = Object.keys(categories);
