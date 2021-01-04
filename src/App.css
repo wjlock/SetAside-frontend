@@ -4,6 +4,7 @@ html {
 }
 body {
   margin-bottom: 60px; /* Margin bottom by footer height */
+  background-color: rgb(132,155,170);
 }
 .footer {
   position: absolute;
@@ -34,3 +35,14 @@ th {
 .blogPost {
   text-align: center;
 }
+.login{
+    line-height: 1em;
+    display: inline-block;
+    text-decoration: none;
+    /* padding: 120px; */
+    margin-left: 750px;
+}
+a{
+  color: whitesmoke;
+}
+

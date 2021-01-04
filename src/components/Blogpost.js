@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
 
 import FormField from "../components/FormField";
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
