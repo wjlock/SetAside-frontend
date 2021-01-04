@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 class Blog extends Component {
@@ -12,13 +13,13 @@ class Blog extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch(`${REACT_APP_SERVER_URL}/api/blogPosts/all`);
+    const response = await axios.get(`${REACT_APP_SERVER_URL}/api/blogPosts/all`);
     const json = await response.json();
     this.setState({ blogPost: json.blogPosts, finishedLoading: false });
   }
 
   reload = async () => {
-    const response = await fetch(`${REACT_APP_SERVER_URL}/api/blogPosts/all`);
+    const response = await axios.get(`${REACT_APP_SERVER_URL}/api/blogPosts/all`);
     const json = await response.json();
     this.setState({ blogPost: json.blogPosts, finishedLoading: true });
   };

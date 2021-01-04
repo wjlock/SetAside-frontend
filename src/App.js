@@ -64,6 +64,9 @@ function App() {
       setIsAuthenticated(false);
     }
   };
+
+  
+
   return (
     <div className="App">
       <Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />

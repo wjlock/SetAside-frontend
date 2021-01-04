@@ -1,3 +1,6 @@
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
@@ -20,7 +23,7 @@ class Blogpost extends Component {
   };
 
   submitForm = () => {
-    fetch(`${REACT_APP_SERVER_URL}/api/blogPosts/new`, {
+    axios.post(`${REACT_APP_SERVER_URL}/api/blogPosts/new`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

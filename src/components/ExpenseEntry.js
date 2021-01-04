@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from 'axios';
+
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const ExpenseEntry = (props) => {
@@ -32,19 +34,19 @@ const ExpenseEntry = (props) => {
   };
 
   const handleSubmit = (evt) => {
-    evt.preventDefault();
-    console.log("test");
+    evt.preventDefault()
+    console.log('test');
     const data = {
       year: expenseYear,
       amount: expenseAmount,
       day: expenseDay,
       category: expenseCategory,
       name: expenseName,
-      month: expenseMonth,
-    };
-    console.log(data);
-    fetch(`${REACT_APP_SERVER_URL}/api/expenses/new`, {
-      method: "POST",
+      month: expenseMonth
+    }
+    console.log(data)
+    axios.post(`${REACT_APP_SERVER_URL}/api/expenses/new`, {
+      method: 'POST',
       headers: {
         "Content-Type": "application/json",
       },
