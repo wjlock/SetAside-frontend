@@ -66,7 +66,6 @@ const ExpenseEntry = (props) => {
       "Groceries",
       "Child Care",
       "Dry Cleaning",
-      "Child Care",
       "House Cleaning",
       "Pet Care",
     ],

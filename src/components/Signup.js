@@ -116,20 +116,66 @@ const Signup = () => {
                             <input type="number" name="account" value={currentAccount} onChange={handleCurrentAccount} className="form-control" />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="name">Home</label>
-                            <input type="number" name="rent" value={funds.home} onChange={handleChange} className="form-control" />
+                            <label htmlFor="number">Home</label>
+                            <ol>
+                            <label>Mortage/Rent</label>
+                            <input type="number" name="home" value={funds.home} onChange={handleChange} className="form-control" />
+                            <label>Utlities</label>
+                            <input type="number" name="home" value={funds.home} onChange={handleChange} className="form-control" />
+                            <label>Phone</label>
+                            <input type="number" name="home" value={funds.home} onChange={handleChange} className="form-control" />
+                            <label>Internet</label>
+                            <input type="number" name="home" value={funds.home} onChange={handleChange} className="form-control" />
+                            <label>Insurance</label>
+                            <input type="number" name="home" value={funds.home} onChange={handleChange} className="form-control" />
+                            </ol>
                         </div>
                         <div className="form-group">
                             <label htmlFor="number">Daily</label>
-                            <input type="number" name="utilities" value={funds.daily} onChange={handleChange} className="form-control" />
+                            <ol>
+                            <label>Groceries</label>
+                            <input type="number" name="daily" value={funds.daily} onChange={handleChange} className="form-control" />
+                            <label>Child Care</label>
+                            <input type="number" name="daily" value={funds.daily} onChange={handleChange} className="form-control" />
+                            <label>Dry Cleaning</label>
+                            <input type="number" name="daily" value={funds.daily} onChange={handleChange} className="form-control" />
+                            <label>House Cleaning</label>
+                            <input type="number" name="daily" value={funds.daily} onChange={handleChange} className="form-control" />
+                            <label>Pet Care</label>
+                            <input type="number" name="daily" value={funds.daily} onChange={handleChange} className="form-control" />
+                            </ol>
                         </div>
                         <div className="form-group">
                             <label htmlFor="number">Transportation</label>
+                            <ol>
+                            <label>Gas</label>
                             <input type="number" name="transportation" value={funds.transportation} onChange={handleChange} className="form-control" />
+                            <label>Car Insurance</label>
+                            <input type="number" name="transportation" value={funds.transportation} onChange={handleChange} className="form-control" />
+                            <label>Repairs</label>
+                            <input type="number" name="transportation" value={funds.transportation} onChange={handleChange} className="form-control" />
+                            <label>Car Wash</label>
+                            <input type="number" name="transportation" value={funds.transportation} onChange={handleChange} className="form-control" />
+                            <label>Parking</label>
+                            <input type="number" name="transportation" value={funds.transportation} onChange={handleChange} className="form-control" />
+                            <label>Public Transporation</label>
+                            <input type="number" name="transportation" value={funds.transportation} onChange={handleChange} className="form-control" />
+                            <label>Taxi/Uber</label>
+                            <input type="number" name="transportation" value={funds.transportation} onChange={handleChange} className="form-control" />
+                            </ol>
                         </div>
                         <div className="form-group">
                             <label htmlFor="number">Entertainment</label>
+                            <ol>
+                            <label>Cable</label>
                             <input type="number" name="entertainment" value={funds.entertainment} onChange={handleChange} className="form-control" />
+                            <label>Movies</label>
+                            <input type="number" name="entertainment" value={funds.entertainment} onChange={handleChange} className="form-control" />
+                            <label>Concerts</label>
+                            <input type="number" name="entertainment" value={funds.entertainment} onChange={handleChange} className="form-control" />
+                            <label>Misc</label>
+                            <input type="number" name="entertainment" value={funds.entertainment} onChange={handleChange} className="form-control" />
+                            </ol>
                         </div>
                         {/* <div className="form-group">
                             <label htmlFor="number">Savings/Investment</label>
