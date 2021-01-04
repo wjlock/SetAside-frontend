@@ -1,5 +1,7 @@
+import Axios from 'axios';
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 import FormField from '../components/FormField'
 
@@ -19,7 +21,7 @@ class Blogpost extends Component {
   }
 
   submitForm = () => {
-    fetch('http://localhost:8000/api/blogPosts/new', {
+    axios.post('http://localhost:8000/api/blogPosts/new', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

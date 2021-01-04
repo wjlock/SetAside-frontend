@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from 'axios';
+
 
 const ExpenseEntry = (props) => {
   
@@ -33,7 +35,7 @@ const ExpenseEntry = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    console.log('test')
+    console.log('test');
     const data = {
       year: expenseYear,
       amount: expenseAmount,
@@ -43,7 +45,7 @@ const ExpenseEntry = (props) => {
       month: expenseMonth
     }
     console.log(data)
-    fetch('http://localhost:8000/api/expenses/new', {
+    axios.post('http://localhost:8000/api/expenses/new', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",

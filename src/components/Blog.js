@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 
 class Blog extends Component {
   constructor() {
@@ -11,13 +12,13 @@ class Blog extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch("http://localhost:8000/api/blogPosts/all");
+    const response = await axios.get("http://localhost:8000/api/blogPosts/all");
     const json = await response.json();
     this.setState({ blogPost: json.blogPosts, finishedLoading: false });
   }
 
   reload = async () => {
-    const response = await fetch("http://localhost:8000/api/blogPosts/all");
+    const response = await axios.get("http://localhost:8000/api/blogPosts/all");
     const json = await response.json();
     this.setState({ blogPost: json.blogPosts, finishedLoading: true });
   };
