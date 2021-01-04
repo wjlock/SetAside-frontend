@@ -16,7 +16,18 @@ const Signup = () => {
     const [income, setIncome] = useState('');
     const [savings, setSavings] = useState('');
     const [currentAccount, setCurrentAccount] = useState('');
-    
+    const [funds, setFunds] = useState({
+        home: 0,
+        daily: 0,
+        transportation: 0,
+        entertainment: 0,
+      }) 
+      const handleChange = (e) => {
+        setFunds({ 
+          ...funds,
+          [e.target.name]:e.target.value
+        })
+      }
 
 
     const handleName = (e) => {
@@ -104,6 +115,30 @@ const Signup = () => {
                             <label htmlFor="account">Current Account Status (Balance & Savings)</label>
                             <input type="number" name="account" value={currentAccount} onChange={handleCurrentAccount} className="form-control" />
                         </div>
+                        <div className="form-group">
+                            <label htmlFor="name">Home</label>
+                            <input type="number" name="rent" value={funds.home} onChange={handleChange} className="form-control" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="number">Daily</label>
+                            <input type="number" name="utilities" value={funds.daily} onChange={handleChange} className="form-control" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="number">Transportation</label>
+                            <input type="number" name="transportation" value={funds.transportation} onChange={handleChange} className="form-control" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="number">Entertainment</label>
+                            <input type="number" name="entertainment" value={funds.entertainment} onChange={handleChange} className="form-control" />
+                        </div>
+                        {/* <div className="form-group">
+                            <label htmlFor="number">Savings/Investment</label>
+                            <input type="number" name="savings" value={funds.savings} onChange={handleChange} className="form-control" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="number">Personal</label>
+                            <input type="number" name="personal" value={funds.personal} onChange={handleChange} className="form-control" />
+                        </div> */}
                         <button type="submit" className="btn btn-primary float-right">Submit</button>
                     </form>
                 </div>
