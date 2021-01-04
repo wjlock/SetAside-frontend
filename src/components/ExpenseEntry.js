@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from 'axios';
 
+const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const ExpenseEntry = (props) => {
-  
   const [expenseYear, setExpenseYear] = useState("");
   const [expenseAmount, setExpenseAmount] = useState("");
   const [expenseDay, setExpenseDay] = useState("");
@@ -45,12 +45,12 @@ const ExpenseEntry = (props) => {
       month: expenseMonth
     }
     console.log(data)
-    axios.post('http://localhost:8000/api/expenses/new', {
+    axios.post(`${REACT_APP_SERVER_URL}/api/expenses/new`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     }).then((res) => {
       res.json().then((json) => {
         this.props.reload();
@@ -173,7 +173,9 @@ const ExpenseEntry = (props) => {
           onChange={handleExpenseAmount}
         ></input>
 
-        <button type="submit" onClick={handleSubmit}>Add Expense</button>
+        <button type="submit" onClick={handleSubmit}>
+          Add Expense
+        </button>
       </form>
     </div>
   );
