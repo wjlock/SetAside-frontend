@@ -1,12 +1,35 @@
 import React, { useState } from "react";
+import axios from "axios";
+import _ from "lodash";
 
 const ExpenseBreakdown = () => {
   const [expenseYear, setExpenseYear] = useState("");
+  const [results, setResults] = useState([]);
   const handleExpenseYear = (e) => {
     setExpenseYear(e.target.value);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const id = localStorage.getItem("jwtToken");
+    const { data } = await axios.get(
+      `http://localhost:8000/api/expenses/${id}/myExpenses`
+    );
+    const filteredResults = _.filter(data, {
+      year: 2021,
+      month: "February",
+    });
+    setResults(filteredResults);
+    console.log(filteredResults);
+  };
+  const renderUtilities = () => {
+    return results
+      .filter((obj) => obj.name === "Utilities")
+      .map(({ name, amount }) => (
+        <tr>
+          <th>Utilities</th>
+          <td>{amount}</td>
+        </tr>
+      ));
   };
   return (
     <div>
@@ -45,18 +68,7 @@ const ExpenseBreakdown = () => {
           <th>Budgeted</th>
           <th>Surplus/(Overage)</th>
         </tr>
-        <tr>
-          <th>Rent/Mortgage</th>
-          <td>MTD</td>
-          <td>BUDGETED</td>
-          <td>SURPLUS/OVERAGES</td>
-        </tr>
-        <tr>
-          <th>Utilities</th>
-        </tr>
-        <tr>
-          <th>Insurance</th>
-        </tr>
+        {renderUtilities()}
       </table>
     </div>
   );
