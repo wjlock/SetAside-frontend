@@ -5,6 +5,7 @@ html {
 body {
   margin-bottom: 60px; /* Margin bottom by footer height */
   background-color: rgb(132,155,170);
+  font-size: 10px,
 }
 .footer {
   position: absolute;
