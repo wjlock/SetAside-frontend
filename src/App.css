@@ -48,5 +48,22 @@ a{
 }
 
 #deleteButton {
-  border-radius: 3%;
+  width: 6px;
+  height: 10px;
+  font-size: 10px;
+  text-align: center;
+  display: inline-block;
+  text-overflow: ellipsis;
+  background-color: Transparent;
+  border: none;
+  margin-bottom: 10px;
+}
+
+#deleteButton :hover {
+  cursor: pointer;
+}
+
+#editButton {
+  height: 2.5px;
+  width: 2.5px;
 }
