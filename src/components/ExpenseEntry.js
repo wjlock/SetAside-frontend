@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -34,24 +34,25 @@ const ExpenseEntry = (props) => {
   };
 
   const handleSubmit = (evt) => {
-    evt.preventDefault()
-    console.log('test');
+    evt.preventDefault();
+    console.log("test");
     const data = {
       year: expenseYear,
       amount: expenseAmount,
       day: expenseDay,
       category: expenseCategory,
       name: expenseName,
-      month: expenseMonth
-    }
+      month: expenseMonth,
+    };
     // console.log(data)
-    axios.post(`${REACT_APP_SERVER_URL}/api/expenses/new`, {
-      data
-      }).then(res => {
-        console.log(res.data)
-    });
+    axios
+      .post(`${REACT_APP_SERVER_URL}/api/expenses/new`, {
+        data,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
   };
-
 
   // logic for dropdowns here
   const categories = {
