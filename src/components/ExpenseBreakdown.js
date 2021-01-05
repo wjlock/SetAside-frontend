@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import _ from "lodash";
 
 const ExpenseBreakdown = () => {
   const [expenseYear, setExpenseYear] = useState("");
@@ -18,9 +17,8 @@ const ExpenseBreakdown = () => {
     const { data } = await axios.get(
       `http://localhost:8000/api/expenses/${id}/myExpenses`
     );
-    const filteredResults = _.filter(data, {
-      year: 2021,
-      month: "March",
+    const filteredResults = data.filter((obj) => {
+      return obj.year == expenseYear && obj.month === expenseMonth;
     });
     setResults(filteredResults);
     console.log(expenseYear);
