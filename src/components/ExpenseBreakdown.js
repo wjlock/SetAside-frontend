@@ -5,6 +5,7 @@ const ExpenseBreakdown = () => {
   const [expenseYear, setExpenseYear] = useState("");
   const [expenseMonth, setExpenseMonth] = useState("");
   const [results, setResults] = useState([]);
+
   const handleExpenseMonth = (e) => {
     setExpenseMonth(e.target.value);
   };
@@ -17,9 +18,12 @@ const ExpenseBreakdown = () => {
     const { data } = await axios.get(
       `http://localhost:8000/api/expenses/${id}/myExpenses`
     );
-    const budget = await axios.get(
-      `http://localhost:8000/api/users/user/${id}`
-    );
+    const budget = await axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/api/users/current`)
+      .then((data) => {
+        const userData = data.data;
+        console.log(data);
+      });
     const filteredResults = data.filter((obj) => {
       return obj.year == expenseYear && obj.month === expenseMonth;
     });
@@ -30,383 +34,367 @@ const ExpenseBreakdown = () => {
     console.log(filteredResults);
   };
   const renderUtilities = () => {
-    if (results.length === 0) {
+    const utilities = results.filter((obj) => obj.name === "Utilities");
+    if (utilities.length) {
+      return utilities.map(({ name, amount }) => (
+        <tr>
+          <th>Utilities</th>
+          <td>{amount ? amount : 0}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Utilities</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Utilities")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Utilities</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderPhone = () => {
-    if (results.length === 0) {
+    const phone = results.filter((obj) => obj.name === "Phone");
+    if (phone.length) {
+      return phone.map(({ name, amount }) => (
+        <tr>
+          <th>Phone</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Phone</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Phone")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Phone</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderInternet = () => {
-    if (results.length === 0) {
+    const internet = results.filter((obj) => obj.name === "Internet");
+    if (internet.length) {
+      return internet.map(({ name, amount }) => (
+        <tr>
+          <th>Internet</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Internet</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Internet")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Internet</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderInsurance = () => {
-    if (results.length === 0) {
+    const insurance = results.filter((obj) => obj.name === "Insurance");
+    if (insurance.length) {
+      return insurance.map(({ name, amount }) => (
+        <tr>
+          <th>Insurance</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Insurance</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Insurance")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Insurance</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderGroceries = () => {
-    if (results.length === 0) {
+    const groceries = results.filter((obj) => obj.name === "Groceries");
+    if (groceries.length) {
+      return groceries.map(({ name, amount }) => (
+        <tr>
+          <th>Groceries</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Groceries</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Groceries")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Groceries</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderChildCare = () => {
-    if (results.length === 0) {
+    const childCare = results.filter((obj) => obj.name === "Child Care");
+    if (childCare.length) {
+      return childCare.map(({ name, amount }) => (
+        <tr>
+          <th>Child Care</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Child Care</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Child Care")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Child Care</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderDryCleaning = () => {
-    if (results.length === 0) {
+    const dryCleaning = results.filter((obj) => obj.name === "Dry Cleaning");
+    if (dryCleaning.length) {
+      return dryCleaning.map(({ name, amount }) => (
+        <tr>
+          <th>Dry Cleaning</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Dry Cleaning</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Dry Cleaning")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Dry Cleaning</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderHouseCleaning = () => {
-    if (results.length === 0) {
+    const houseCleaning = results.filter(
+      (obj) => obj.name === "House Cleaning"
+    );
+    if (houseCleaning.length) {
+      return houseCleaning.map(({ name, amount }) => (
+        <tr>
+          <th>House Cleaning</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>House Cleaning</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "House Cleaning")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>House Cleaning</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderPetCare = () => {
-    if (results.length === 0) {
+    const petCare = results.filter((obj) => obj.name === "Pet Care");
+    if (petCare.length) {
+      return petCare.map(({ name, amount }) => (
+        <tr>
+          <th>Pet Care</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Pet Care</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Pet Care")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Pet Care</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderGas = () => {
-    if (results.length === 0) {
+    const gas = results.filter((obj) => obj.name === "Gas");
+    if (gas.length) {
+      return gas.map(({ name, amount }) => (
+        <tr>
+          <th>Gas</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Gas</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Gas")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Gas</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderCarInsurance = () => {
-    if (results.length === 0) {
+    const carInsurance = results.filter((obj) => obj.name === "Car Insurance");
+    if (carInsurance.length) {
+      return carInsurance.map(({ name, amount }) => (
+        <tr>
+          <th>Car Insurance</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Car Insurance</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Car Insurance")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Car Insurance</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderRepairs = () => {
-    if (results.length === 0) {
+    const repairs = results.filter((obj) => obj.name === "Repairs");
+    if (repairs.length) {
+      return repairs.map(({ name, amount }) => (
+        <tr>
+          <th>Repairs</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Repairs</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Repairs")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Repairs</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderCarWash = () => {
-    if (results.length === 0) {
+    const carWash = results.filter((obj) => obj.name === "Car Wash");
+    if (carWash.length) {
+      return carWash.map(({ name, amount }) => (
+        <tr>
+          <th>Car Wash</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Car Wash</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Car Wash")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Car Wash</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderParking = () => {
-    if (results.length === 0) {
+    const car = results.filter((obj) => obj.name === "Car");
+    if (car.length) {
+      return car.map(({ name, amount }) => (
+        <tr>
+          <th>Car</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
-          <th>Parking</th>
+          <th>Car</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Parking")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Parking</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderPublicTransportation = () => {
-    if (results.length === 0) {
+    const publicTransportation = results.filter(
+      (obj) => obj.name === "Public Transportation"
+    );
+    if (publicTransportation.length) {
+      return publicTransportation.map(({ name, amount }) => (
+        <tr>
+          <th>Public Transportation</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Public Transportation</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Public Transportation")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Public Transportation</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderTaxiUber = () => {
-    if (results.length === 0) {
+    const taxiUber = results.filter((obj) => obj.name === "Taxi Uber");
+    if (taxiUber.length) {
+      return taxiUber.map(({ name, amount }) => (
+        <tr>
+          <th>Taxi/Uber</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Taxi/Uber</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Taxi/Uber")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Taxi/Uber</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderTelevision = () => {
-    if (results.length === 0) {
+    const television = results.filter((obj) => obj.name === "Television");
+    if (television.length) {
+      return television.map(({ name, amount }) => (
+        <tr>
+          <th>Television</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Television</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Television")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Television</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderMovies = () => {
-    if (results.length === 0) {
+    const movies = results.filter((obj) => obj.name === "Movies");
+    if (movies.length) {
+      return movies.map(({ name, amount }) => (
+        <tr>
+          <th>Movies</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Movies</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Movies")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Movies</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderConcerts = () => {
-    if (results.length === 0) {
+    const concerts = results.filter((obj) => obj.name === "Concerts");
+    if (concerts.length) {
+      return concerts.map(({ name, amount }) => (
+        <tr>
+          <th>Concerts</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Concerts</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Concerts")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Concerts</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   const renderMisc = () => {
-    if (results.length === 0) {
+    const misc = results.filter((obj) => obj.name === "Misc");
+    if (misc.length) {
+      return misc.map(({ name, amount }) => (
+        <tr>
+          <th>Misc</th>
+          <td>{amount}</td>
+        </tr>
+      ));
+    } else {
       return (
         <tr>
           <th>Misc</th>
           <td>0</td>
         </tr>
       );
-    } else {
-      return results
-        .filter((obj) => obj.name === "Misc")
-        .map(({ name, amount }) => (
-          <tr>
-            <th>Misc</th>
-            <td>{amount}</td>
-          </tr>
-        ));
     }
   };
   return (
