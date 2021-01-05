@@ -169,7 +169,7 @@ const Dashboard = () => {
             <div>
                 <div>
                 <div className="progress">
-                <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: '10%'}} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: '25%'}} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                 <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: '75%'}} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div className="progress">
