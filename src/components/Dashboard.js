@@ -32,17 +32,19 @@ const Dashboard = () => {
     const [movies, setMovies] = useState('');
     const [concerts, setConcerts] = useState('');
     const [miscellaneous, setMiscellaneous] = useState('');
-    const [pieHome, setPieHome] = useState('');
-    const [pieTransportation, setPieTransportation] = useState('');
-    const [pieDaily, setPieDaily] = useState('');
-    const [pieEntertainment, setPieEntertainment] = useState('');
+    const [barHome, setBarHome] = useState('');
+    const [barTransportation, setBarTransportation] = useState('');
+    const [barDaily, setBarDaily] = useState('');
+    const [barEntertainment, setBarEntertainment] = useState('');
+    const [totalBudget, setTotalBudget] = useState('')
+    const [expenses, setExpenses ] = useState([])
+    const [expensesGroupedByCategory, setExpensesGroupByCategory] = useState({})
 
     const home = [rent, insurance, phone, utilities, internet]
     const transportation = [gas, carInsurance, carRepairs, carWash, parking, publicTransportation, rideShare]
     const daily = [groceries, childCare, dryCleaning, houseCleaning, petCare]
     const entertainment = [television, movies, concerts, miscellaneous]
-  
-    
+
 
     const handleRent = (e) => {
         setRent(e.target.value);
@@ -155,22 +157,49 @@ const Dashboard = () => {
             setRideShare(userData.rideShare)
             console.log(data);
         })
-        .then(()=> {
-            setPieHome(sum(home))
-            setPieTransportation(sum(transportation))
-            setPieDaily(sum(daily))
-            setPieEntertainment(sum(entertainment))
+        .then(() => {
+            setBarHome(sum(home) / totalBudget)
+            setBarTransportation(sum(transportation))
+            setBarDaily(sum(daily))
+            setBarEntertainment(sum(entertainment))
+            setTotalBudget(sum(home) + sum(transportation) + sum(daily) + sum(entertainment))
         }) 
-    })
-    
+    },[])
+    function groupByCategory(expenseArr) {
+        let output= {}
+        for(let expense of expenseArr) {
+            if(output[expense.category] === undefined){
+                output[expense.category] = []
+            }
+            output[expense.category].push(expense) 
+        } 
+        return output
+    }
+        useEffect(() => {
+            const id = localStorage.getItem("jwtToken");
+            axios.get(
+              `${process.env.REACT_APP_SERVER_URL}/api/expenses/${id}/myExpenses`
+            ).then((data) => {
+                setExpenses(data.data)
+                setExpensesGroupByCategory(groupByCategory(data.data))
+            }) ;
+        },[])
+        function sumExpenses(expensesArr) {
+            let output = 0;
+            for(let expense of expensesArr) {
+                output += expense.amount
+            }
+            return output
+        }
+        console.log(totalBudget, expenses, sumExpenses(expenses))
+
         return(
             //budget make it in range 
             //preset average value 
             <div>
                 <div>
                 <div className="progress">
-                <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: '25%'}} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: '75%'}} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: `${sumExpenses(expenses)/ totalBudget}%` }} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div className="progress">
                 <div className="progress-bar progress-bar-striped bg-success" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -179,7 +208,6 @@ const Dashboard = () => {
                 <div className="progress-bar progress-bar-striped bg-info" role="progressbar" style={{width: '50%'}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div className="progress">
-                <div className="progress-bar progress-bar-striped bg-warning" role="progressbar" style={{width: '75'}} aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                 <div className="progress-bar progress-bar-striped bg-warning" role="progressbar" style={{width: '75%'}} aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div className="progress">
@@ -188,24 +216,92 @@ const Dashboard = () => {
             </div>
 
             {/* spending */}
-            <PieChart className="pie-chart" lineWidth="40" paddingAngle="1" labelPosition='78' labelStyle={{fontSize: '7px'}} animate
+            <PieChart className="pie-chart" lineWidth="50" paddingAngle="1" labelPosition='78' labelStyle={{fontSize: '5px'}} animate
                 animationDuration={500} animationEasing="ease-out"
             data={[
-                { title: 'Home',
-                    value: pieHome,
+                { title: 'Rent',
+                    value: rent,
                     color: '#E38627'
                 },
-                { title: 'Transportation',
-                    value: pieTransportation,
+                { title: 'Utilities',
+                    value: utilities,
                     color: '#C13C37'
                 },
-                { title: 'Entertainment',
-                    value: pieEntertainment,
+                { title: 'Phone',
+                    value: phone,
                     color: '#6A2135' 
                 },
-                { title: 'Daily',
-                    value: pieDaily,
+                { title: 'Internet',
+                    value: internet,
                     color: '#194D33' 
+                },
+                { title: 'Insurance',
+                    value: insurance,
+                    color: '#343a40' 
+                },
+                { title: 'Groceries',
+                    value: 20,
+                    color: '#17a2b8' 
+                },
+                { title: 'Child Care',
+                    value: 20,
+                    color: '#ffc107' 
+                },
+                { title: 'Dry Cleaning',
+                    value: 20,
+                    color: '#6610f2' 
+                },
+                { title: 'House Cleaning',
+                    value: 20,
+                    color: '#20c997' 
+                },
+                { title: 'Pet Care',
+                    value: 20,
+                    color: '#6c757d' 
+                },
+                { title: 'Gas',
+                    value: 20,
+                    color: '#28a745' 
+                },
+                { title: 'Car Insurance',
+                    value: 20,
+                    color: '#dc3545' 
+                },
+                { title: 'Car Repairs',
+                    value: 20,
+                    color: '#fff' 
+                },
+                { title: 'Car Wash',
+                    value: 20,
+                    color: '#e83e8c' 
+                },
+                { title: 'Parking',
+                    value: 20,
+                    color: '#6f42c1' 
+                },
+                { title: 'Public Transportation',
+                    value: 20,
+                    color: '#007bff' 
+                },
+                { title: 'Ride Share',
+                    value: 20,
+                    color: '#322267' 
+                },
+                { title: 'Television',
+                    value: 20,
+                    color: '#C787D0' 
+                },
+                { title: 'Movies',
+                    value: 20,
+                    color: '#D08E87' 
+                },
+                { title: 'Concerts',
+                    value: 20,
+                    color: '#D0C387' 
+                },
+                { title: 'Miscellaneous',
+                    value: 20,
+                    color: '#ABD087' 
                 },
             ]}
             label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%'}
