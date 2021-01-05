@@ -1,6 +1,9 @@
 import { PieChart } from 'react-minimal-pie-chart';
 import React, { Component, useState, useEffect } from 'react';
 import axios from 'axios';
+import {
+    atan2, chain, derivative, e, evaluate, log, pi, pow, round, sqrt, sum
+  } from 'mathjs'
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
  
@@ -29,13 +32,18 @@ const Dashboard = () => {
     const [movies, setMovies] = useState('');
     const [concerts, setConcerts] = useState('');
     const [miscellaneous, setMiscellaneous] = useState('');
-    const [savings, setSavings] = useState('');
+    const [pieHome, setPieHome] = useState('');
+    const [pieTransportation, setPieTransportation] = useState('');
+    const [pieDaily, setPieDaily] = useState('');
+    const [pieEntertainment, setPieEntertainment] = useState('');
 
     const home = [rent, insurance, phone, utilities, internet]
-    const transportaion= [gas, carInsurance, carRepairs, carWash, parking, publicTransportation, rideShare]
+    const transportation = [gas, carInsurance, carRepairs, carWash, parking, publicTransportation, rideShare]
     const daily = [groceries, childCare, dryCleaning, houseCleaning, petCare]
     const entertainment = [television, movies, concerts, miscellaneous]
   
+    
+
     const handleRent = (e) => {
         setRent(e.target.value);
     }
@@ -145,9 +153,14 @@ const Dashboard = () => {
             setMovies(userData.movies)
             setTelevision(userData.television)
             setRideShare(userData.rideShare)
-            setSavings(userData.savings)
             console.log(data);
         })
+        .then(()=> {
+            setPieHome(sum(home))
+            setPieTransportation(sum(transportation))
+            setPieDaily(sum(daily))
+            setPieEntertainment(sum(entertainment))
+        }) 
     })
     
         return(
@@ -156,7 +169,7 @@ const Dashboard = () => {
             <div>
                 <div>
                 <div className="progress">
-                <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: '10%'}} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: '25%'}} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                 <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: '75%'}} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div className="progress">
@@ -179,24 +192,20 @@ const Dashboard = () => {
                 animationDuration={500} animationEasing="ease-out"
             data={[
                 { title: 'Home',
-                    value: 20,
+                    value: pieHome,
                     color: '#E38627'
                 },
                 { title: 'Transportation',
-                    value: 20,
+                    value: pieTransportation,
                     color: '#C13C37'
                 },
                 { title: 'Entertainment',
-                    value: 20,
+                    value: pieEntertainment,
                     color: '#6A2135' 
                 },
                 { title: 'Daily',
-                    value: 20,
+                    value: pieDaily,
                     color: '#194D33' 
-                },
-                { title: 'Savings',
-                    value: 20,
-                    color: '#921982' 
                 },
             ]}
             label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%'}
