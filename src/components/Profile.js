@@ -43,11 +43,9 @@ const Profile = (props) => {
                     {expense.amount}{"....................... "}
                     {expense.month}{" "}
                     {expense.day}, {" "}
-                    {expense.year} 
-                    <button id="deleteButton" type="submit" onClick={() => handleDelete(expense._id)}>Delete</button>
-                    {/* <Switch>
-                        <Route exact path="/expenseEdit" component={ExpenseEdit} />
-                    </Switch> */}
+                    {expense.year}{"           "} 
+                    <Link to={`/editexpense/${expense._id}`} id="editButton">⚙︎</Link> 
+                    <button class="btn btn-primary btn-lg btn-block" id="deleteButton" type="submit" onClick={() => handleDelete(expense._id)}>✕</button> 
                     </h3>
                     )}
                 </div>

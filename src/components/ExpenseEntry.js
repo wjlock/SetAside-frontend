@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom"
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -10,6 +11,7 @@ const ExpenseEntry = (props) => {
   const [expenseCategory, setExpenseCategory] = useState("null");
   const [expenseName, setExpenseName] = useState("");
   const [expenseMonth, setExpenseMonth] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   const handleExpenseYear = (e) => {
     setExpenseYear(e.target.value);
@@ -51,6 +53,7 @@ const ExpenseEntry = (props) => {
       })
       .then((res) => {
         console.log(res.data);
+        setRedirect(true);
       });
   };
 
@@ -91,6 +94,12 @@ const ExpenseEntry = (props) => {
   const createNames = namesList?.map(function (name) {
     return <option value={name}>{name}</option>;
   });
+
+  if (redirect) {
+      return ( 
+          <Redirect to="/profile" />
+    )
+  } 
 
   return (
     <div>

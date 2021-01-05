@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom"
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-const ExpenseEntry = (props) => {
+const EditExpense = (props) => {
   const [expenseYear, setExpenseYear] = useState("");
   const [expenseAmount, setExpenseAmount] = useState("");
   const [expenseDay, setExpenseDay] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("null");
   const [expenseName, setExpenseName] = useState("");
   const [expenseMonth, setExpenseMonth] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   const handleExpenseYear = (e) => {
     setExpenseYear(e.target.value);
@@ -33,8 +35,8 @@ const ExpenseEntry = (props) => {
     setExpenseMonth(e.target.value);
   };
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log("test");
     const data = {
       year: expenseYear,
@@ -46,11 +48,12 @@ const ExpenseEntry = (props) => {
     };
     // console.log(data)
     axios
-      .put(`${REACT_APP_SERVER_URL}/api/expenses/${id}`, {
+      .put(`${REACT_APP_SERVER_URL}/api/expenses/${props.match.params.id}`, {
         data,
       })
       .then((res) => {
         console.log(res.data);
+        setRedirect(true);
       });
   };
 
@@ -92,10 +95,17 @@ const ExpenseEntry = (props) => {
     return <option value={name}>{name}</option>;
   });
 
+    
+    if (redirect) {
+        return ( 
+            <Redirect to="/profile" />
+        )
+    } 
+
   return (
     <div>
       <div>
-        <h1>Enter an Expense</h1>
+        <h1>Edit Expense</h1>
       </div>
       <form>
         <label htmlFor="expenseCategory">Choose Category</label>
@@ -168,11 +178,11 @@ const ExpenseEntry = (props) => {
         ></input>
 
         <button type="submit" onClick={handleSubmit}>
-          Add Expense
+          Save
         </button>
       </form>
     </div>
   );
 };
 
-export default ExpenseEntry;
+export default EditExpense;
