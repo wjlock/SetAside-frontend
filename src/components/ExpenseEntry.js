@@ -97,7 +97,7 @@ const ExpenseEntry = (props) => {
         <h1>Enter an expense</h1>
       </div>
       <form>
-        <label htmlFor="expenseCategory">Choose a category</label>
+        <label htmlFor="expenseCategory">Choose Category</label>
         <select
           name="expenseCategoryDropdown"
           className="expenseCategoryDropdown"
@@ -107,7 +107,7 @@ const ExpenseEntry = (props) => {
         >
           {createCats}
         </select>
-        <label htmlFor="expenseName">Choose a name</label>
+        <label htmlFor="expenseName">Choose Name</label>
         <select
           name="expenseName"
           id="expenseName"
