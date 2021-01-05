@@ -216,6 +216,7 @@ const Signup = () => {
                             <label htmlFor="account">Current Account Status (Balance & Savings)</label>
                             <input type="number" name="account" value={currentAccount} onChange={handleCurrentAccount} className="form-control" />
                         </div>
+                        <h5>How much do you plan on spending per month for each category below?</h5>
                         <div className="form-group">
                             <label htmlFor="number">Home</label>
                             <ol>

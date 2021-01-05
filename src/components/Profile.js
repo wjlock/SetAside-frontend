@@ -1,22 +1,33 @@
 import React, { useState, useEffect }  from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Route, Switch, Redirect } from "react-router-dom";
+
+// import ExpenseEdit from "./components/ExpenseEdit";
 
 const Profile = (props) => {
     const [expenses, setExpenses] = useState([]);
+    const [shouldReload, setShouldReload] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
             const id = localStorage.getItem("jwtToken");
-            await axios.get(`http://localhost:8000/api/expenses/${id}/myExpenses`)
+            axios.get(`http://localhost:8000/api/expenses/${id}/myExpenses`)
                 .then(res => {
                     setExpenses(res.data);
-                    console.log(expenses);
-                    console.log('test')
+                    setShouldReload(false);
                 });
-        };
-        fetchData();
-    }, []);
+    }, [shouldReload]);
+
+
+    const handleDelete = (id) => {
+        debugger
+        axios.delete(`http://localhost:8000/api/expenses/${id}`)
+          .then(res => {
+            console.log(res);
+            console.log(res.data);
+            setShouldReload(true);
+          })
+      }
 
     return (
         <div className="row">
@@ -32,7 +43,11 @@ const Profile = (props) => {
                     {expense.amount}{"....................... "}
                     {expense.month}{" "}
                     {expense.day}, {" "}
-                    {expense.year}
+                    {expense.year} 
+                    <button id="deleteButton" type="submit" onClick={() => handleDelete(expense._id)}>Delete</button>
+                    {/* <Switch>
+                        <Route exact path="/expenseEdit" component={ExpenseEdit} />
+                    </Switch> */}
                     </h3>
                     )}
                 </div>
