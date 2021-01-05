@@ -77,7 +77,7 @@ const ExpenseBreakdown = () => {
         </tr>
       ));
   };
-  const renderCarWash = () => {
+  const renderChildCare = () => {
     return results
       .filter((obj) => obj.name === "Child Care")
       .map(({ name, amount }) => (
@@ -273,6 +273,22 @@ const ExpenseBreakdown = () => {
         {renderPhone()}
         {renderInternet()}
         {renderInsurance()}
+        {renderGroceries()}
+        {renderChildCare()}
+        {renderDryCleaning()}
+        {renderHouseCleaning()}
+        {renderPetCare()}
+        {renderGas()}
+        {renderCarInsurance()}
+        {renderRepairs()}
+        {renderCarWash()}
+        {renderParking()}
+        {renderPublicTransportation()}
+        {renderTaxiUber()}
+        {renderTelevision()}
+        {renderMovies()}
+        {renderConcerts()}
+        {renderMisc()}
       </table>
     </div>
   );
