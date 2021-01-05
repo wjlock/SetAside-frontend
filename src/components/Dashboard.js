@@ -123,6 +123,29 @@ const Dashboard = () => {
         axios.get(
             `${process.env.REACT_APP_SERVER_URL}/api/users/current`
         ).then((data)=> {
+            const userData = data.data
+            setRent(userData.rent)
+            setUtilities(userData.utilities)
+            setPhone(userData.phone)
+            setInternet(userData.internet)
+            setInsurance(userData.insurance)
+            setGroceries(userData.groceries)
+            setChildCare(userData.childCare)
+            setDryCleaning(userData.dryCleaning)
+            setHouseCleaning(userData.houseCleaning)
+            setPetCare(userData.petCare)
+            setGas(userData.gas)
+            setCarInsurance(userData.carInsurance)
+            setCarRepairs(userData.carRepairs)
+            setCarWash(userData.carWash)
+            setParking(userData.parking)
+            setPublicTransportation(userData.publicTransportation)
+            setMiscellaneous(userData.miscellaneous)
+            setConcerts(userData.concerts)
+            setMovies(userData.movies)
+            setTelevision(userData.television)
+            setRideShare(userData.rideShare)
+            setSavings(userData.savings)
             console.log(data);
         })
     })
