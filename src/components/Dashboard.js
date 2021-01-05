@@ -30,20 +30,29 @@ import React, { Component } from 'react';
         </div>
 
         {/* spending */}
-        <PieChart className="pie-chart" lineWidth="100" paddingAngle="3" 
+        <PieChart className="pie-chart" lineWidth="80" paddingAngle="1" labelPosition='50' labelStyle={{fontSize: '10px'}}
         data={[
-            { title: 'One',
-                value: 33,
+            { title: 'Home',
+                value: 20,
                 color: '#E38627'
             },
-            { title: 'Two',
-                value: 33,
+            { title: 'Transportation',
+                value: 20,
                 color: '#C13C37'
             },
-            { title: 'Three',
-                value: 33,
+            { title: 'Entertainment',
+                value: 20,
                 color: '#6A2135' 
             },
+            { title: 'Personal',
+                value: 20,
+                color: '#194D33' 
+            },
+            { title: 'Savings',
+                value: 20,
+                color: '#921982' 
+        },
+
         ]}
         label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%'}
         />
