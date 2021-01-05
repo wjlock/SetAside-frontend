@@ -1,29 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Profile = (props) => {
-    console.log(props);
-    const userData = props.user ? 
-    (<div>
-        <h1>Profile</h1>
-        <p><strong>Name:</strong> {props.user.name}</p> 
-        <p><strong>Email:</strong> {props.user.email}</p> 
-        <p><strong>ID:</strong> {props.user.id}</p> 
-    </div>) : <h4>Loading...</h4>
+    const [expenses, setExpenses] = useState([]);
 
-    const errorDiv = () => {
-        return (
-            <div className="text-center pt-4">
-                <h3>Please <Link to="/login">login</Link> to view this page</h3>
-            </div>
-        );
-    };
-    
+    useEffect(() => {
+        const fetchData = async () => {
+            const id = localStorage.getItem("jwtToken");
+            await axios.get(`http://localhost:8000/api/expenses/${id}/myExpenses`)
+                .then(res => {
+                    setExpenses(res.data);
+                    console.log(expenses);
+                    console.log('test')
+                });
+        };
+        fetchData();
+    }, []);
+
     return (
-        <div>
-            { props.user ? userData : errorDiv() }
+        <div className="row">
+            <div className="col-md-4">
+                <h1>{props.user.name}</h1>
+                <p>{props.user.email}</p>
+                <p>Monthly Income: ${props.user.income}</p>
+            </div>
+            <div>
+                <div>
+                    {expenses.map((expense, index) => 
+                    <h3 key={index}> {expense.name}: $
+                    {expense.amount}{"....................... "}
+                    {expense.month}{" "}
+                    {expense.day}, {" "}
+                    {expense.year}
+                    </h3>
+                    )}
+                </div>
+            </div>
         </div>
-    );
+    )
+
 
 }
 

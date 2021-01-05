@@ -95,7 +95,7 @@ const ExpenseEntry = (props) => {
   return (
     <div>
       <div>
-        <h1>Enter an expense</h1>
+        <h1>Enter an Expense</h1>
       </div>
       <form>
         <label htmlFor="expenseCategory">Choose Category</label>
