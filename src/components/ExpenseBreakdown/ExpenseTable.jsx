@@ -82,8 +82,8 @@ const ExpenseTable = ({results = undefined, expenseData = [{}]}) => {
       <tr>
         <th>Repairs</th>
         <td>{results?.repairs || 0}</td>
-        <td>{expenseData?.repairs || 0}</td>
-        <td>{expenseData.repairs - results?.repairs || expenseData.repairs - 0}</td>
+        <td>{expenseData?.carRepairs || 0}</td>
+        <td>{expenseData.carRepairs - results?.repairs || expenseData.carRepairs - 0}</td>
       </tr>
       <tr>
         <th>Car Wash</th>
@@ -106,8 +106,8 @@ const ExpenseTable = ({results = undefined, expenseData = [{}]}) => {
       <tr>
         <th>Taxi Uber</th>
         <td>{results?.taxiUber || 0}</td>
-        <td>{expenseData?.taxiUber || 0}</td>
-        <td>{expenseData.taxiUber - results?.taxiUber || expenseData.taxiUber - 0}</td>
+        <td>{expenseData?.rideShare || 0}</td>
+        <td>{expenseData.rideShare - results?.taxiUber || expenseData.rideShare - 0}</td>
       </tr>
       <tr>
         <th>Television</th>
@@ -130,8 +130,8 @@ const ExpenseTable = ({results = undefined, expenseData = [{}]}) => {
       <tr>
         <th>Misc</th>
         <td>{results?.misc || 0}</td>
-        <td>{expenseData?.misc || 0}</td>
-        <td>{expenseData.misc - results?.misc || expenseData.misc - 0}</td>
+        <td>{expenseData?.miscellaneous || 0}</td>
+        <td>{expenseData.miscellaneous - results?.misc || expenseData.miscellaneous - 0}</td>
       </tr>
     </table>
   )
