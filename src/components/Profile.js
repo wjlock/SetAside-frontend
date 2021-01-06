@@ -11,7 +11,7 @@ const Profile = (props) => {
 
     useEffect(() => {
             const id = localStorage.getItem("jwtToken");
-            axios.get(`http://localhost:8000/api/expenses/${id}/myExpenses`)
+            axios.get(`${REACT_APP_SERVER_URL}/api/expenses/${id}/myExpenses`)
                 .then(res => {
                     setExpenses(res.data);
                     setShouldReload(false);
@@ -21,7 +21,7 @@ const Profile = (props) => {
 
     const handleDelete = (id) => {
         debugger
-        axios.delete(`http://localhost:8000/api/expenses/${id}`)
+        axios.delete(`${REACT_APP_SERVER_URL}/api/expenses/${id}`)
           .then(res => {
             console.log(res);
             console.log(res.data);

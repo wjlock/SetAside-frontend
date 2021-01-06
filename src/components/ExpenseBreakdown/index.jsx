@@ -21,7 +21,7 @@ const ExpenseBreakdown = () => {
     e.preventDefault();
     const id = localStorage.getItem("jwtToken");
     const { data } = await axios.get(
-      `http://localhost:8000/api/expenses/${id}/myExpenses`
+      `${REACT_APP_SERVER_URL}/api/expenses/${id}/myExpenses`
     );
     const budgetData = await axios
       .get(`${process.env.REACT_APP_SERVER_URL}/api/users/current`)
