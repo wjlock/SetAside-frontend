@@ -1,10 +1,14 @@
+* {
+  font-family: 'Raleway', sans-serif;
+}
+
 html {
   position: relative;
   min-height: 100%;
 }
 body {
   margin-bottom: 60px; /* Margin bottom by footer height */
-  background-color: rgb(132,155,170);
+  background-color: rgb(228, 228, 228);
   font-size: 10px,
 }
 .footer {
@@ -58,6 +62,7 @@ a{
   background-color: Transparent;
   border: none;
   margin-bottom: 10px;
+  color: rgb(224, 51, 51);
 }
 
 /* .entertainment{
@@ -73,6 +78,70 @@ a{
 #editButton {
   height: 2.5px;
   width: 2.5px;
+  color: rgb(138, 138, 138);
+}
+
+.expenseTitle {
+  text-align: center;
+}
+
+.expenseEntryForm {
+  display: inline-block;
+  margin-left: 32%;
+  margin-top: 2.5%;
+  background-color: white;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 2%;
+}
+
+.expenseEditForm {
+  display: inline-block;
+  margin-left: 32%;
+  margin-top: 2.5%;
+  background-color: white;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 2%;
+}
+
+#expenseCategoryDropdown {
+  height: 20px;
+}
+
+#expenseQuestion {
+  justify-content: left;
+}
+
+#expenseAnswer {
+  float: right;
+}
+
+.expenses {
+  width: auto;
+  height: auto;
+  padding: auto;
+  border: 2px solid black;
+}
+
+#expensesText {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#addSubmit {
+  border-radius: 5%;
+  float: right;
+}
+
+#saveExpense {
+  border-radius: 5%;
+  float: right;
+}
+
+#profileHeader {
+  text-align: center;
+  text-decoration: underline;
 }
 
 .totalSpending, .home, .entertainment, .transportation, .daily{
