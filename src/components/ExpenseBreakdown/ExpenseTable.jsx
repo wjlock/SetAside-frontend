@@ -6,12 +6,18 @@ const ExpenseTable = ({results = undefined, expenseData = [{}]}) => {
   console.log("Table Expenses => ", expenseData);
 
   return (
-    <table>
+    <table className="expensetable">
       <tr>
         <th></th>
         <th>Month to Date</th>
         <th>Budgeted</th>
         <th>Surplus/(Overage)</th>
+      </tr>
+      <tr>
+        <th>Rent</th>
+        <td>{results?.rent || 0}</td>
+        <td>{expenseData?.rent || 0}</td>
+        <td>{expenseData.utilties - results?.rent || expenseData.rent - 0}</td>
       </tr>
       <tr>
         <th>Utilities</th>

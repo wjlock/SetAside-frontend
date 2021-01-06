@@ -59,9 +59,9 @@ const ExpenseBreakdown = () => {
   return (
     <div>
       <div>
-        <h1>Expense Breakdown</h1>
+        <h1 className='breakdowntitle'>Expense Breakdown</h1>
       </div>
-      <form on onSubmit={handleSubmit}>
+      <form className="monthselector" on onSubmit={handleSubmit}>
         <label for="expenseMonth">Choose a month</label>
         <select
           name="expenseMonth"
@@ -82,7 +82,7 @@ const ExpenseBreakdown = () => {
           <option value="November">November</option>
           <option value="December">December</option>
         </select>
-        <label for="expenseYear">Choose a year</label>
+        <label for="expenseYear">Enter a year</label>
         <input
           type="number"
           name="expenseYear"
