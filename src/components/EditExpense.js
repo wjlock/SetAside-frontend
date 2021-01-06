@@ -105,23 +105,26 @@ const EditExpense = (props) => {
   return (
     <div>
       <div>
-        <h1>Edit Expense</h1>
+        <h1 class="expenseTitle">Edit Expense</h1>
       </div>
-      <form>
-        <label htmlFor="expenseCategory">Choose Category</label>
+      <form class="expenseEditForm">
+        <label id="expenseQuestion" htmlFor="expenseCategory">Choose Category</label>{" "}
         <select
           name="expenseCategoryDropdown"
           className="expenseCategoryDropdown"
           id="expenseCategoryDropdown"
+          id="expenseAnswer"
           form="categoryForm"
           onChange={handleExpenseCategory}
         >
           {createCats}
         </select>
-        <label htmlFor="expenseName">Choose Name</label>
+        <br></br>
+        <label id="expenseQuestion" htmlFor="expenseName">Choose Name</label>{" "}
         <select
           name="expenseName"
           id="expenseName"
+          id="expenseAnswer"
           form="nameForm"
           onChange={handleExpenseName}
         >
@@ -131,9 +134,11 @@ const EditExpense = (props) => {
           <option value={expenseName}>Gas</option>
           <option value={expenseName}>Cable/Internet</option> */}
         </select>
-        <label htmlFor="expenseDay">What day?</label>
+        <br></br>
+        <label id="expenseQuestion" htmlFor="expenseDay">What Day?</label>{" "}
         <input
           type="number"
+          id="expenseAnswer"
           name="expenseDay"
           value={expenseDay}
           onChange={handleExpenseDay}
@@ -142,10 +147,12 @@ const EditExpense = (props) => {
           max="31"
           min="01"
         ></input>
-        <label htmlFor="expenseMonth">Choose a Month</label>
+        <br></br>
+        <label id="expenseQuestion" htmlFor="expenseMonth">What Month?</label>{" "}
         <select
           name="expenseMonth"
-          id="expenseMonth"
+          id="expenseEntry"
+          id="expenseAnswer"
           form="monthForm"
           onChange={handleExpenseMonth}
         >
@@ -162,22 +169,25 @@ const EditExpense = (props) => {
           <option value="November">November</option>
           <option value="December">December</option>
         </select>
-        <label htmlFor="expenseYear">Choose a Year</label>
+        <br></br>
+        <label id="expenseQuestion" htmlFor="expenseYear">What Year?</label>{" "}
         <input
           type="number"
+          id="expenseAnswer"
           name="expenseYear"
           value={expenseYear}
           onChange={handleExpenseYear}
         ></input>
-        <label htmlFor="expenseAmount">How much did you spend?</label>
+        <br></br>
+        <label id="expenseQuestion" htmlFor="expenseAmount">How much did you spend?</label>{" "}
         <input
           type="number"
           name="expenseAmount"
           value={expenseAmount}
           onChange={handleExpenseAmount}
         ></input>
-
-        <button type="submit" onClick={handleSubmit}>
+        <br></br>
+        <button id="saveExpense" type="submit" onClick={handleSubmit}>
           Save
         </button>
       </form>

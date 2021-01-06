@@ -37,15 +37,16 @@ const Profile = (props) => {
                 <p>Monthly Income: ${props.user.income}</p>
             </div>
             <div>
-                <div>
+                <h1 id="profileHeader">My Expenses</h1>
+                <div class="expenses">
                     {expenses.map((expense, index) => 
-                    <h3 key={index}> {expense.name}: $
+                    <h3 id="expensesText" key={index}> {expense.name}: $
                     {expense.amount}{"....................... "}
                     {expense.month}{" "}
                     {expense.day}, {" "}
                     {expense.year}{"           "} 
                     <Link to={`/editexpense/${expense._id}`} id="editButton">⚙︎</Link> 
-                    <button class="btn btn-primary btn-lg btn-block" id="deleteButton" type="submit" onClick={() => handleDelete(expense._id)}>✕</button> 
+                    <button class="btn btn-primary btn-lg btn-block" id="deleteButton" type="submit" onClick={() => handleDelete(expense._id)}>X</button> 
                     </h3>
                     )}
                 </div>
