@@ -48,6 +48,7 @@ a{
 }
 
 #deleteButton {
+  border-radius: 3%;
   width: 6px;
   height: 10px;
   font-size: 10px;
@@ -59,6 +60,12 @@ a{
   margin-bottom: 10px;
 }
 
+/* .entertainment{
+  padding-right: 15px;
+  padding-left: 5px;
+  font-size: 13px;
+} */
+
 #deleteButton :hover {
   cursor: pointer;
 }
@@ -67,3 +74,10 @@ a{
   height: 2.5px;
   width: 2.5px;
 }
+
+.totalSpending, .home, .entertainment, .transportation, .daily{
+  padding-right: 20px;
+  padding-left: 5px;
+  font-size: 12px;
+}
+
