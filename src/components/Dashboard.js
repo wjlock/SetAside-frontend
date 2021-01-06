@@ -201,7 +201,7 @@ const Dashboard = () => {
             //budget make it in range 
             //preset average value 
             <div>
-                <h3>Your Budget</h3>
+                <h3>Your Monthly Budget</h3>
                 <div>
                     <div className="progress">
                     <label className="totalSpending">Over all spending</label>
@@ -225,7 +225,7 @@ const Dashboard = () => {
                 </div>
             </div>
             <p> </p>
-            <h3>Spent so far</h3>
+            <h3 id="dashboardPieChart">Individual Expenses</h3>
             {/* spending */}
             <PieChart className="pie-chart" lineWidth="50" paddingAngle="1" labelPosition='78' labelStyle={{fontSize: '5px'}} animate
                 animationDuration={500} animationEasing="ease-out"
