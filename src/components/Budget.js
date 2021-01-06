@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 // import keys from '../utils/credentials';
 // const { REACT_APP_SERVER_URL } = keys;
@@ -25,18 +25,18 @@ const handleChange = (e) => {
       e.preventDefault();
       setRedirect(true) 
 
-      // if (password === confirmPassword) {
-      //     const newUser = { name, email, password };
+      if (password === confirmPassword) {
+          const newUser = { name, email, password };
 
-      //     axios.post('/dashboard, newUser')
-      //     .then(response => {
-      //         console.log(response);
-      //         setRedirect(true);
-      //     })
-      //     .catch(error => {
-      //         console.log(error);
-      //     })
-      // }
+          axios.post('/dashboard, newUser')
+          .then(response => {
+              console.log(response);
+              setRedirect(true);
+          })
+          .catch(error => {
+              console.log(error);
+          })
+      }
   }
   if (redirect) {
     return <Redirect to='/dashboard'/>
