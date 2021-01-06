@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import _ from 'lodash';
 import ExpenseTable from './ExpenseTable';
+const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const ExpenseBreakdown = () => {
   const [expenseYear, setExpenseYear] = useState("");
