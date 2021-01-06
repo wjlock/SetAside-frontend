@@ -129,6 +129,7 @@ const Dashboard = () => {
     const handleMiscellaneous = (e) => {
         setMiscellaneous(e.target.value);
     }
+    //grabbing info from current user budget to set range of spending and showing on progress by category 
     useEffect(() => {
         axios.get(
             `${process.env.REACT_APP_SERVER_URL}/api/users/current`
@@ -159,12 +160,13 @@ const Dashboard = () => {
         })
         .then(() => {
             setBarHome(sum(home) / totalBudget)
-            setBarTransportation(sum(transportation))
+            setBarTransportation(sum(transportation) )
             setBarDaily(sum(daily))
             setBarEntertainment(sum(entertainment))
             setTotalBudget(sum(home) + sum(transportation) + sum(daily) + sum(entertainment))
         }) 
     },[])
+
     function groupByCategory(expenseArr) {
         let output= {}
         for(let expense of expenseArr) {
@@ -175,6 +177,8 @@ const Dashboard = () => {
         } 
         return output
     }
+
+    //pie-chart induvidual spending of expenses 
         useEffect(() => {
             const id = localStorage.getItem("jwtToken");
             axios.get(
@@ -197,24 +201,31 @@ const Dashboard = () => {
             //budget make it in range 
             //preset average value 
             <div>
+                <h3>Your Budget</h3>
                 <div>
-                <div className="progress">
-                <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: `${sumExpenses(expenses)/ totalBudget}%` }} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div className="progress">
+                    <label className="totalSpending">Over all spending</label>
+                    <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: `${sumExpenses(expenses) / totalBudget}%` }} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <div className="progress">
-                <div className="progress-bar progress-bar-striped bg-success" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div className="progress">
+                    <label className="home">Home</label>
+                    <div className="progress-bar progress-bar-striped bg-success" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <div className="progress">
-                <div className="progress-bar progress-bar-striped bg-info" role="progressbar" style={{width: '50%'}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div className="progress">
+                    <label className="transportation">Transportation</label>
+                    <div className="progress-bar progress-bar-striped bg-info" role="progressbar" style={{width: '50%'}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <div className="progress">
-                <div className="progress-bar progress-bar-striped bg-warning" role="progressbar" style={{width: '75%'}} aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div className="progress">
+                    <label className='daily'>Daily</label>
+                    <div className="progress-bar progress-bar-striped bg-warning" role="progressbar" style={{width: '75%'}} aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <div className="progress">
-                <div className="progress-bar progress-bar-striped bg-danger" role="progressbar" style={{width: '100%'}} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div className="progress">
+                    <label className='entertainment'>Entertainment</label>
+                    <div className="progress-bar progress-bar-striped bg-danger" role="progressbar" style={{width: '80%'}} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
-
+            <p> </p>
+            <h3>Spent so far</h3>
             {/* spending */}
             <PieChart className="pie-chart" lineWidth="50" paddingAngle="1" labelPosition='78' labelStyle={{fontSize: '5px'}} animate
                 animationDuration={500} animationEasing="ease-out"
@@ -240,67 +251,67 @@ const Dashboard = () => {
                     color: '#343a40' 
                 },
                 { title: 'Groceries',
-                    value: 20,
+                    value: groceries,
                     color: '#17a2b8' 
                 },
                 { title: 'Child Care',
-                    value: 20,
+                    value: childCare,
                     color: '#ffc107' 
                 },
                 { title: 'Dry Cleaning',
-                    value: 20,
+                    value: dryCleaning,
                     color: '#6610f2' 
                 },
                 { title: 'House Cleaning',
-                    value: 20,
+                    value: houseCleaning,
                     color: '#20c997' 
                 },
                 { title: 'Pet Care',
-                    value: 20,
+                    value: petCare,
                     color: '#6c757d' 
                 },
                 { title: 'Gas',
-                    value: 20,
+                    value: gas,
                     color: '#28a745' 
                 },
                 { title: 'Car Insurance',
-                    value: 20,
+                    value: carInsurance,
                     color: '#dc3545' 
                 },
                 { title: 'Car Repairs',
-                    value: 20,
+                    value: carRepairs,
                     color: '#fff' 
                 },
                 { title: 'Car Wash',
-                    value: 20,
+                    value: carWash,
                     color: '#e83e8c' 
                 },
                 { title: 'Parking',
-                    value: 20,
+                    value: parking,
                     color: '#6f42c1' 
                 },
                 { title: 'Public Transportation',
-                    value: 20,
+                    value: publicTransportation,
                     color: '#007bff' 
                 },
                 { title: 'Ride Share',
-                    value: 20,
+                    value: rideShare,
                     color: '#322267' 
                 },
                 { title: 'Television',
-                    value: 20,
+                    value: television,
                     color: '#C787D0' 
                 },
                 { title: 'Movies',
-                    value: 20,
+                    value: movies,
                     color: '#D08E87' 
                 },
                 { title: 'Concerts',
-                    value: 20,
+                    value: concerts,
                     color: '#D0C387' 
                 },
                 { title: 'Miscellaneous',
-                    value: 20,
+                    value: miscellaneous,
                     color: '#ABD087' 
                 },
             ]}

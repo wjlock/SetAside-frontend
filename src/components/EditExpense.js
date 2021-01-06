@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom"
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-const ExpenseEntry = (props) => {
+const EditExpense = (props) => {
   const [expenseYear, setExpenseYear] = useState("");
   const [expenseAmount, setExpenseAmount] = useState("");
   const [expenseDay, setExpenseDay] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("null");
   const [expenseName, setExpenseName] = useState("");
   const [expenseMonth, setExpenseMonth] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   const handleExpenseYear = (e) => {
     setExpenseYear(e.target.value);
@@ -33,8 +35,8 @@ const ExpenseEntry = (props) => {
     setExpenseMonth(e.target.value);
   };
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log("test");
     const data = {
       year: expenseYear,
@@ -46,11 +48,12 @@ const ExpenseEntry = (props) => {
     };
     // console.log(data)
     axios
-      .put(`${REACT_APP_SERVER_URL}/api/expenses/${id}`, {
+      .put(`${REACT_APP_SERVER_URL}/api/expenses/${props.match.params.id}`, {
         data,
       })
       .then((res) => {
         console.log(res.data);
+        setRedirect(true);
       });
   };
 
@@ -92,26 +95,36 @@ const ExpenseEntry = (props) => {
     return <option value={name}>{name}</option>;
   });
 
+    
+    if (redirect) {
+        return ( 
+            <Redirect to="/profile" />
+        )
+    } 
+
   return (
     <div>
       <div>
-        <h1>Enter an Expense</h1>
+        <h1 class="expenseTitle">Edit Expense</h1>
       </div>
-      <form>
-        <label htmlFor="expenseCategory">Choose Category</label>
+      <form class="expenseEditForm">
+        <label id="expenseQuestion" htmlFor="expenseCategory">Choose Category</label>{" "}
         <select
           name="expenseCategoryDropdown"
           className="expenseCategoryDropdown"
           id="expenseCategoryDropdown"
+          id="expenseAnswer"
           form="categoryForm"
           onChange={handleExpenseCategory}
         >
           {createCats}
         </select>
-        <label htmlFor="expenseName">Choose Name</label>
+        <br></br>
+        <label id="expenseQuestion" htmlFor="expenseName">Choose Name</label>{" "}
         <select
           name="expenseName"
           id="expenseName"
+          id="expenseAnswer"
           form="nameForm"
           onChange={handleExpenseName}
         >
@@ -121,9 +134,11 @@ const ExpenseEntry = (props) => {
           <option value={expenseName}>Gas</option>
           <option value={expenseName}>Cable/Internet</option> */}
         </select>
-        <label htmlFor="expenseDay">What day?</label>
+        <br></br>
+        <label id="expenseQuestion" htmlFor="expenseDay">What Day?</label>{" "}
         <input
           type="number"
+          id="expenseAnswer"
           name="expenseDay"
           value={expenseDay}
           onChange={handleExpenseDay}
@@ -132,10 +147,12 @@ const ExpenseEntry = (props) => {
           max="31"
           min="01"
         ></input>
-        <label htmlFor="expenseMonth">Choose a Month</label>
+        <br></br>
+        <label id="expenseQuestion" htmlFor="expenseMonth">What Month?</label>{" "}
         <select
           name="expenseMonth"
-          id="expenseMonth"
+          id="expenseEntry"
+          id="expenseAnswer"
           form="monthForm"
           onChange={handleExpenseMonth}
         >
@@ -152,27 +169,30 @@ const ExpenseEntry = (props) => {
           <option value="November">November</option>
           <option value="December">December</option>
         </select>
-        <label htmlFor="expenseYear">Choose a Year</label>
+        <br></br>
+        <label id="expenseQuestion" htmlFor="expenseYear">What Year?</label>{" "}
         <input
           type="number"
+          id="expenseAnswer"
           name="expenseYear"
           value={expenseYear}
           onChange={handleExpenseYear}
         ></input>
-        <label htmlFor="expenseAmount">How much did you spend?</label>
+        <br></br>
+        <label id="expenseQuestion" htmlFor="expenseAmount">How much did you spend?</label>{" "}
         <input
           type="number"
           name="expenseAmount"
           value={expenseAmount}
           onChange={handleExpenseAmount}
         ></input>
-
-        <button type="submit" onClick={handleSubmit}>
-          Add Expense
+        <br></br>
+        <button id="saveExpense" type="submit" onClick={handleSubmit}>
+          Save
         </button>
       </form>
     </div>
   );
 };
 
-export default ExpenseEntry;
+export default EditExpense;

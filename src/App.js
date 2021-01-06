@@ -15,6 +15,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import About from "./components/About";
 import ExpenseEntry from "./components/ExpenseEntry";
+import EditExpense from "./components/EditExpense"
 import Dashboard from "./components/Dashboard";
 import Budget from "./components/Budget";
 import Blogpost from "./components/Blogpost";
@@ -97,6 +98,7 @@ function App() {
           <Route exact path="/blogpost" component={Blogpost} />
           <Route exact path="/blog" component={Blog} />
           <Route exact path="/expensebreakdown" component={ExpenseBreakdown} />
+          <Route exact path="/editexpense/:id" component={EditExpense} />
         </Switch>
       </div>
       <Footer />
