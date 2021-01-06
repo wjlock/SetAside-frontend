@@ -38,8 +38,15 @@ const Dashboard = () => {
     const [barEntertainment, setBarEntertainment] = useState('');
     const [totalBudget, setTotalBudget] = useState('')
     const [expenses, setExpenses ] = useState([])
-    const [expensesGroupedByCategory, setExpensesGroupByCategory] = useState({})
+    const [expensesGroupedByCategory, setExpensesGroupByCategory] = useState({
+        Daily:[],
+        Home:[],
+        Transportation:[],
+        Entertainment:[]
+    })
 
+    const [expensesGroupByName, setExpensisesGroupByName] = useState({})
+    
     const home = [rent, insurance, phone, utilities, internet]
     const transportation = [gas, carInsurance, carRepairs, carWash, parking, publicTransportation, rideShare]
     const daily = [groceries, childCare, dryCleaning, houseCleaning, petCare]
@@ -129,7 +136,8 @@ const Dashboard = () => {
     const handleMiscellaneous = (e) => {
         setMiscellaneous(e.target.value);
     }
-    //grabbing info from current user budget to set range of spending and showing on progress by category 
+
+    //pie-chart
     useEffect(() => {
         axios.get(
             `${process.env.REACT_APP_SERVER_URL}/api/users/current`
@@ -177,8 +185,18 @@ const Dashboard = () => {
         } 
         return output
     }
+    function groupByName(expenseArr) {
+        let output= {}
+        for(let expense of expenseArr) {
+            if(output[expense.name] === undefined){
+                output[expense.name] = []
+            }
+            output[expense.name].push(expense) 
+        } 
+        return output
+    }
 
-    //pie-chart induvidual spending of expenses 
+    //progress bar  
         useEffect(() => {
             const id = localStorage.getItem("jwtToken");
             axios.get(
@@ -186,18 +204,63 @@ const Dashboard = () => {
             ).then((data) => {
                 setExpenses(data.data)
                 setExpensesGroupByCategory(groupByCategory(data.data))
+                setExpensisesGroupByName(groupByName(data.data))
             }) ;
         },[])
         function sumExpenses(expensesArr) {
+            if (expensesArr===undefined){
+                return 0
+            }
             let output = 0;
             for(let expense of expensesArr) {
                 output += expense.amount
             }
             return output
         }
-        console.log(totalBudget, expenses, sumExpenses(expenses))
 
+        
+        const dailyWidth = sumExpenses(expensesGroupedByCategory.Daily) / sum(daily) * 100
+        const homeWidth = sumExpenses(expensesGroupedByCategory.Home) / sum(home) * 100
+        const entertainmentWidth = sumExpenses(expensesGroupedByCategory.Entertainment) / sum(entertainment) * 100
+        const transportationWidth = sumExpenses(expensesGroupedByCategory.Transportation) / sum(transportation) * 100
+
+        const colorMap = {
+            'Rent': '#E38627',
+            'Utilities': '#C13C37',
+            'Phone': '#6A2135',
+            'Internet': '#194D33',
+            'Insurance': '#343a40',
+            'Groceries': '#17a2b8',
+            'Child Care': '#ffc107',
+            'Dry Cleaning': '#6610f2',
+            'House Cleaning': '#20c997',
+            'Pet Care': '#6c757d',
+            'Gas': '#28a745',
+            'Car Insurance': '#dc3545',
+            'Car Repairs': '#fff',
+            'Car Wash': '#e83e8c',
+            'Parking': '#6f42c1',
+            'Public Transportation': '#007bff',
+            'Ride Share': '#322267',
+            'Television': '#C787D0',
+            'Movies': '#D08E87',
+            'Concerts': '#D0C387',
+            'Miscellaneous': '#ABD087'
+        }
+        let pieData = []
+         for(let expensesName of Object.keys(expensesGroupByName)){
+             let total= sumExpenses(expensesGroupByName[expensesName])
+             if (total > 0) {
+                 pieData.push({
+                     title: expensesName,
+                     value: total,
+                     color: colorMap[expensesName]
+                 })
+             }
+
+         }
         return(
+            
             //budget make it in range 
             //preset average value 
             <div>
@@ -209,112 +272,27 @@ const Dashboard = () => {
                 </div>
                     <div className="progress">
                     <label className="home">Home</label>
-                    <div className="progress-bar progress-bar-striped bg-success" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div className="progress-bar progress-bar-striped bg-success" role="progressbar" style={{width: `${homeWidth}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                     <div className="progress">
                     <label className="transportation">Transportation</label>
-                    <div className="progress-bar progress-bar-striped bg-info" role="progressbar" style={{width: '50%'}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div className="progress-bar progress-bar-striped bg-info" role="progressbar" style={{width: `${transportationWidth}%`}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                     <div className="progress">
                     <label className='daily'>Daily</label>
-                    <div className="progress-bar progress-bar-striped bg-warning" role="progressbar" style={{width: '75%'}} aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div className="progress-bar progress-bar-striped bg-warning" role="progressbar" style={{width: `${dailyWidth}%`}} aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                     <div className="progress">
                     <label className='entertainment'>Entertainment</label>
-                    <div className="progress-bar progress-bar-striped bg-danger" role="progressbar" style={{width: '80%'}} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div className="progress-bar progress-bar-striped bg-danger" role="progressbar" style={{width: `${entertainmentWidth}%`}} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
-            <p> </p>
-            <h3 id="dashboardPieChart">Individual Expenses</h3>
-            {/* spending */}
+                <p> </p>
+                <h3 id="dashboardPieChart">Individual Expenses</h3>
+                {/* spending */}
             <PieChart className="pie-chart" lineWidth="50" paddingAngle="1" labelPosition='78' labelStyle={{fontSize: '5px'}} animate
                 animationDuration={500} animationEasing="ease-out"
-            data={[
-                { title: 'Rent',
-                    value: rent,
-                    color: '#E38627'
-                },
-                { title: 'Utilities',
-                    value: utilities,
-                    color: '#C13C37'
-                },
-                { title: 'Phone',
-                    value: phone,
-                    color: '#6A2135' 
-                },
-                { title: 'Internet',
-                    value: internet,
-                    color: '#194D33' 
-                },
-                { title: 'Insurance',
-                    value: insurance,
-                    color: '#343a40' 
-                },
-                { title: 'Groceries',
-                    value: groceries,
-                    color: '#17a2b8' 
-                },
-                { title: 'Child Care',
-                    value: childCare,
-                    color: '#ffc107' 
-                },
-                { title: 'Dry Cleaning',
-                    value: dryCleaning,
-                    color: '#6610f2' 
-                },
-                { title: 'House Cleaning',
-                    value: houseCleaning,
-                    color: '#20c997' 
-                },
-                { title: 'Pet Care',
-                    value: petCare,
-                    color: '#6c757d' 
-                },
-                { title: 'Gas',
-                    value: gas,
-                    color: '#28a745' 
-                },
-                { title: 'Car Insurance',
-                    value: carInsurance,
-                    color: '#dc3545' 
-                },
-                { title: 'Car Repairs',
-                    value: carRepairs,
-                    color: '#fff' 
-                },
-                { title: 'Car Wash',
-                    value: carWash,
-                    color: '#e83e8c' 
-                },
-                { title: 'Parking',
-                    value: parking,
-                    color: '#6f42c1' 
-                },
-                { title: 'Public Transportation',
-                    value: publicTransportation,
-                    color: '#007bff' 
-                },
-                { title: 'Ride Share',
-                    value: rideShare,
-                    color: '#322267' 
-                },
-                { title: 'Television',
-                    value: television,
-                    color: '#C787D0' 
-                },
-                { title: 'Movies',
-                    value: movies,
-                    color: '#D08E87' 
-                },
-                { title: 'Concerts',
-                    value: concerts,
-                    color: '#D0C387' 
-                },
-                { title: 'Miscellaneous',
-                    value: miscellaneous,
-                    color: '#ABD087' 
-                },
-            ]}
+            data={pieData}
             label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%'}
             />
             </div>
