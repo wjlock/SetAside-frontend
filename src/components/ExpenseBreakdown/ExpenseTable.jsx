@@ -23,7 +23,7 @@ const ExpenseTable = ({results = undefined, expenseData = [{}]}) => {
         <th>Utilities</th>
         <td>{results?.utilities || 0}</td>
         <td>{expenseData?.utilities || 0}</td>
-        <td>{expenseData.utilties - results?.utilities || expenseData.utilities - 0}</td>
+        <td>{expenseData.utilities - results?.utilities || expenseData.utilities - 0}</td>
       </tr>
       <tr>
         <th>Phone</th>
