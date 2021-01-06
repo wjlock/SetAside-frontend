@@ -153,7 +153,12 @@ a{
   text-decoration: underline;
 }
 
-.totalSpending, .transportation{
+.totalSpending{
+  padding-right: 1px;
+  padding-left: 5px;
+  font-size: 12px;
+}
+.transportation{
   padding-right: 14.8px;
   padding-left: 5px;
   font-size: 12px;
