@@ -4,12 +4,12 @@ import logo from "../Asset/SetAside.png"
 
 const Welcome = () => {
   return (
-    <div>
-      <h1>Welcome to SetAside</h1>
-      <img src={logo} alt="logo-SetAside"/>
-      <div className='login'>
-      <a href='/signup'>Signup</a>{" "}
-      <a href='/login'>Login</a>
+    <div id="welcomePage">
+      <h1 id="welcomeHeader">Welcome to SetAside</h1>
+      <img id="setAsideLogo" src={logo} alt="logo-SetAside"/>
+      <div className='welcomeButtons'>
+      <a id="welcomeButtonSignup" href='/signup'>Signup</a>{" "}
+      <a id="welcomeButtonLogin" href='/login'>Login</a>
       </div>
     </div>
   );

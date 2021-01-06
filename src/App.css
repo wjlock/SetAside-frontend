@@ -2,6 +2,14 @@
   font-family: 'Raleway', sans-serif;
 }
 
+.navbar {
+  background: rgb(81, 150, 173);
+}
+
+.footer {
+  background: rgb(81, 150, 173);
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -9,7 +17,7 @@ html {
 body {
   margin-bottom: 60px; /* Margin bottom by footer height */
   background-color: rgb(228, 228, 228);
-  font-size: 10px,
+  background-size: cover;
 }
 .footer {
   position: absolute;
@@ -31,6 +39,7 @@ th {
   width: 300px;
   position: relative;
   padding-top: 10px;
+  margin-left: 25%;
 }
 
 /* .progress{
@@ -150,3 +159,40 @@ a{
   font-size: 12px;
 }
 
+#dashboardPieChart {
+  text-align: center;
+  text-decoration: underline;
+}
+
+#setAsideLogo {
+  margin-left: 10%;
+  border-radius: 2%;
+}
+
+#welcomeHeader {
+  margin-left: 10%;
+}
+.welcomeButtons {
+  color: black;
+  margin-left: 80%;
+}
+
+#welcomeButtonSignup {
+  color: black;
+  height: 15px;
+  width: 15px;
+}
+
+#welcomeButtonLogin {
+  color: black;
+  height: 15px;
+  width: 15px;
+}
+
+#expenseBreakdownHeader {
+  text-align: center;
+}
+
+#expenseBreakdownTable {
+  margin-left: 20%;
+}

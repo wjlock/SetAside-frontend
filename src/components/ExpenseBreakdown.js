@@ -400,10 +400,10 @@ const ExpenseBreakdown = () => {
   return (
     <div>
       <div>
-        <h1>Expense Breakdown</h1>
+        <h1 id="expenseBreakdownHeader">Expense Breakdown</h1>
       </div>
-      <form on onSubmit={handleSubmit}>
-        <label for="expenseMonth">Choose a month</label>
+      <form id="expenseBreakdownTable" on onSubmit={handleSubmit}>
+        <label for="expenseMonth">Choose a month</label> {" "}
         <select
           name="expenseMonth"
           id="expenseMonth"
@@ -422,8 +422,8 @@ const ExpenseBreakdown = () => {
           <option value="October">October</option>
           <option value="November">November</option>
           <option value="December">December</option>
-        </select>
-        <label for="expenseYear">Choose a year</label>
+        </select> {" "}
+        <label for="expenseYear">Choose a year</label> {" "}
         <input
           type="number"
           name="expenseYear"
@@ -432,7 +432,7 @@ const ExpenseBreakdown = () => {
         ></input>
         <button type="submit">Submit</button>
       </form>
-      <table>
+      <table id="expenseBreakdownTable">
         <tr>
           <th></th>
           <th>Month to Date</th>
