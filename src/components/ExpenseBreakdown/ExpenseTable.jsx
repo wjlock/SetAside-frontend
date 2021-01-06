@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 import { startCase } from 'lodash';
 
 const ExpenseTable = ({results = undefined, expenseData = [{}]}) => {
-  console.log("Table Results => ", results)
-  console.log("Table Expenses => ", expenseData);
-
   return (
-    <table>
+    <table className="breakDown">
       <tr>
         <th></th>
         <th>Month to Date</th>

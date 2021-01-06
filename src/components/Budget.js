@@ -24,19 +24,6 @@ const handleChange = (e) => {
     const handleSubmit = (e) => {
       e.preventDefault();
       setRedirect(true) 
-
-      // if (password === confirmPassword) {
-      //     const newUser = { name, email, password };
-
-      //     axios.post('/dashboard, newUser')
-      //     .then(response => {
-      //         console.log(response);
-      //         setRedirect(true);
-      //     })
-      //     .catch(error => {
-      //         console.log(error);
-      //     })
-      // }
   }
   if (redirect) {
     return <Redirect to='/dashboard'/>

@@ -16,7 +16,7 @@ const Signup = () => {
     const [income, setIncome] = useState('');
     const [savings, setSavings] = useState('');
     const [currentAccount, setCurrentAccount] = useState('');
-    const [residence, setResidence] = useState('');
+    // const [residence, setResidence] = useState('');
     const [rent, setRent] = useState('');
     const [utilities, setUtilities] = useState('');
     const [phone, setPhone] = useState('');

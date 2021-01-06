@@ -11,8 +11,6 @@ class Blog extends Component {
       finishedLoading: true,
     };
   }
-
-
   componentDidMount() {
     axios.get(`${REACT_APP_SERVER_URL}/api/blogPosts/all`)
       .then(res => {
@@ -29,7 +27,6 @@ class Blog extends Component {
         </div>
       );
     }
-
     return this.state.blogPost.map((blog, key) => (
       <div class="blogPost" key={key}>
         <h2>{blog.title}</h2>

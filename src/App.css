@@ -153,12 +153,26 @@ a{
   text-decoration: underline;
 }
 
-.totalSpending, .home, .entertainment, .transportation, .daily{
-  padding-right: 20px;
+.totalSpending, .transportation{
+  padding-right: 14.8px;
   padding-left: 5px;
   font-size: 12px;
 }
-
+.daily{
+  padding-right: 67.3px;
+  padding-left: 5px;
+  font-size: 12px;
+}
+.home{
+  padding-right: 60.6px;
+  padding-left: 5px;
+  font-size: 12px;
+}
+.entertainment{
+  padding-right: 16px;
+  padding-left: 5px;
+  font-size: 12px;
+}
 #dashboardPieChart {
   text-align: center;
   text-decoration: underline;
@@ -195,4 +209,7 @@ a{
 
 #expenseBreakdownTable {
   margin-left: 20%;
+}
+.breakDown{
+  font-size: large;
 }

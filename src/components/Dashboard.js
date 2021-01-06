@@ -1,12 +1,10 @@
 import { PieChart } from 'react-minimal-pie-chart';
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {
-    atan2, chain, derivative, e, evaluate, log, pi, pow, round, sqrt, sum
-  } from 'mathjs'
+import {sum} from 'mathjs'
+
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
- 
 
 
 const Dashboard = () => {
@@ -32,13 +30,11 @@ const Dashboard = () => {
     const [movies, setMovies] = useState('');
     const [concerts, setConcerts] = useState('');
     const [miscellaneous, setMiscellaneous] = useState('');
-    const [barHome, setBarHome] = useState('');
-    const [barTransportation, setBarTransportation] = useState('');
-    const [barDaily, setBarDaily] = useState('');
-    const [barEntertainment, setBarEntertainment] = useState('');
+
     const [totalBudget, setTotalBudget] = useState('')
     const [expenses, setExpenses ] = useState([])
     const [expensesGroupedByCategory, setExpensesGroupByCategory] = useState({
+        OverAll:[],
         Daily:[],
         Home:[],
         Transportation:[],
@@ -46,97 +42,12 @@ const Dashboard = () => {
     })
 
     const [expensesGroupByName, setExpensisesGroupByName] = useState({})
-    
     const home = [rent, insurance, phone, utilities, internet]
     const transportation = [gas, carInsurance, carRepairs, carWash, parking, publicTransportation, rideShare]
     const daily = [groceries, childCare, dryCleaning, houseCleaning, petCare]
     const entertainment = [television, movies, concerts, miscellaneous]
-
-
-    const handleRent = (e) => {
-        setRent(e.target.value);
-    }
+    const overAll = [home, transportation, daily, entertainment]
     
-    const handleUtilities = (e) => {
-        setUtilities(e.target.value);
-    }
-    
-    const handlePhone = (e) => {
-        setPhone(e.target.value);
-    }
-    
-    const handleInternet = (e) => {
-        setInternet(e.target.value);
-    }
-    
-    const handleInsurance = (e) => {
-        setInsurance(e.target.value);
-    }
-
-    const handleGroceries = (e) => {
-        setGroceries(e.target.value);
-    }
-
-    const handleChildCare = (e) => {
-        setChildCare(e.target.value);
-    }
-
-    const handleDryCleaning = (e) => {
-        setDryCleaning(e.target.value);
-    }
-
-    const handleHouseCleaning = (e) => {
-        setHouseCleaning(e.target.value);
-    }
-
-    const handlePetCare = (e) => {
-        setPetCare(e.target.value);
-    }
-
-    const handleGas = (e) => {
-        setGas(e.target.value);
-    }
-
-    const handleCarInsurance = (e) => {
-        setCarInsurance(e.target.value);
-    }
-
-    const handleCarRepairs = (e) => {
-        setCarRepairs(e.target.value);
-    }
-
-    const handleCarWash = (e) => {
-        setCarWash(e.target.value);
-    }
-
-    const handleParking = (e) => {
-        setParking(e.target.value);
-    }
-
-    const handlePublicTransportation = (e) => {
-        setPublicTransportation(e.target.value);
-    }
-
-    const handleRideShare = (e) => {
-        setRideShare(e.target.value);
-    }
-
-    const handleTelevision = (e) => {
-        setTelevision(e.target.value);
-    }
-
-    const handleMovies = (e) => {
-        setMovies(e.target.value);
-    }
-
-    const handleConcerts = (e) => {
-        setConcerts(e.target.value);
-    }
-
-    const handleMiscellaneous = (e) => {
-        setMiscellaneous(e.target.value);
-    }
-
     //pie-chart
     useEffect(() => {
         axios.get(
@@ -167,10 +78,6 @@ const Dashboard = () => {
             console.log(data);
         })
         .then(() => {
-            setBarHome(sum(home) / totalBudget)
-            setBarTransportation(sum(transportation) )
-            setBarDaily(sum(daily))
-            setBarEntertainment(sum(entertainment))
             setTotalBudget(sum(home) + sum(transportation) + sum(daily) + sum(entertainment))
         }) 
     },[])
@@ -218,7 +125,7 @@ const Dashboard = () => {
             return output
         }
 
-        
+        const overallWidth = sumExpenses(expensesGroupedByCategory.OverAll) + (sum(home) + sum(transportation) + sum(daily) + sum(entertainment)) / sum(overAll)
         const dailyWidth = sumExpenses(expensesGroupedByCategory.Daily) / sum(daily) * 100
         const homeWidth = sumExpenses(expensesGroupedByCategory.Home) / sum(home) * 100
         const entertainmentWidth = sumExpenses(expensesGroupedByCategory.Entertainment) / sum(entertainment) * 100
@@ -241,11 +148,11 @@ const Dashboard = () => {
             'Car Wash': '#e83e8c',
             'Parking': '#6f42c1',
             'Public Transportation': '#007bff',
-            'Ride Share': '#322267',
+            'Ride Share': '#20c997',
             'Television': '#C787D0',
             'Movies': '#D08E87',
             'Concerts': '#D0C387',
-            'Miscellaneous': '#ABD087'
+            'Miscellaneous': '#dc3545'
         }
         let pieData = []
          for(let expensesName of Object.keys(expensesGroupByName)){
@@ -257,33 +164,31 @@ const Dashboard = () => {
                      color: colorMap[expensesName]
                  })
              }
-
          }
-        return(
-            
+        return(            
             //budget make it in range 
             //preset average value 
             <div>
                 <h3>Your Monthly Budget</h3>
                 <div>
                     <div className="progress">
-                    <label className="totalSpending">Over all spending</label>
-                    <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: `${sumExpenses(expenses) / totalBudget}%` }} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    <label className="totalSpending"> Overall spending </label>
+                    <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: `${overallWidth}%` }} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                     <div className="progress">
-                    <label className="home">Home</label>
+                    <label className="home"> Home </label>
                     <div className="progress-bar progress-bar-striped bg-success" role="progressbar" style={{width: `${homeWidth}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                     <div className="progress">
-                    <label className="transportation">Transportation</label>
+                    <label className="transportation"> Transportation </label>
                     <div className="progress-bar progress-bar-striped bg-info" role="progressbar" style={{width: `${transportationWidth}%`}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                     <div className="progress">
-                    <label className='daily'>Daily</label>
+                    <label className='daily'> Daily </label>
                     <div className="progress-bar progress-bar-striped bg-warning" role="progressbar" style={{width: `${dailyWidth}%`}} aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                     <div className="progress">
-                    <label className='entertainment'>Entertainment</label>
+                    <label className='entertainment'> Entertainment </label>
                     <div className="progress-bar progress-bar-striped bg-danger" role="progressbar" style={{width: `${entertainmentWidth}%`}} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
