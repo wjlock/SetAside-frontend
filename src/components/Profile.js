@@ -2,6 +2,7 @@ import React, { useState, useEffect }  from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Route, Switch, Redirect } from "react-router-dom";
+const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 // import ExpenseEdit from "./components/ExpenseEdit";
 
@@ -11,7 +12,7 @@ const Profile = (props) => {
 
     useEffect(() => {
             const id = localStorage.getItem("jwtToken");
-            axios.get(`http://localhost:8000/api/expenses/${id}/myExpenses`)
+            axios.get(`${REACT_APP_SERVER_URL}/api/expenses/${id}/myExpenses`)
                 .then(res => {
                     setExpenses(res.data);
                     setShouldReload(false);
@@ -21,7 +22,7 @@ const Profile = (props) => {
 
     const handleDelete = (id) => {
         debugger
-        axios.delete(`http://localhost:8000/api/expenses/${id}`)
+        axios.delete(`${REACT_APP_SERVER_URL}/api/expenses/${id}`)
           .then(res => {
             console.log(res);
             console.log(res.data);
