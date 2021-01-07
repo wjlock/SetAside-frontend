@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="container text-center">
-        <span className="text-muted">
+        <span>
           @2020 Created by Zach Finnan, Corey Wilson, Carolina Urrea, and Will
           Locklier
         </span>

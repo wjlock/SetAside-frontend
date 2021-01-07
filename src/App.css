@@ -1,5 +1,5 @@
 * {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .navbar {
@@ -8,6 +8,7 @@
 
 .footer {
   background: rgb(81, 150, 173);
+  color: white;
 }
 
 html {
@@ -28,18 +29,19 @@ body {
 }
 th {
   padding: 10px;
+  text-decoration: underline;
 }
 
 .expense-input {
   width: 65px;
 }
 
-.pie-chart{
+.pie-chart {
   height: 300px;
   width: 300px;
   position: relative;
   padding-top: 10px;
-  margin-left: 25%;
+  margin-left: 36%;
 }
 
 /* .progress{
@@ -49,14 +51,14 @@ th {
 .blogPost {
   text-align: center;
 }
-.login{
-    line-height: 1em;
-    display: inline-block;
-    text-decoration: none;
-    /* padding: 120px; */
-    margin-left: 750px;
+.login {
+  line-height: 1em;
+  display: inline-block;
+  text-decoration: none;
+  /* padding: 120px; */
+  margin-left: 750px;
 }
-a{
+a {
   color: whitesmoke;
 }
 
@@ -171,6 +173,13 @@ a{
 }
 .entertainment{
   padding-right: 16px;
+}
+.totalSpending,
+.home,
+.entertainment,
+.transportation,
+.daily {
+  padding-right: 20px;
   padding-left: 5px;
   font-size: 12px;
 }
@@ -230,4 +239,34 @@ a{
   text-align: center;
 }
 
+td {
+  display: flex inline;
+  text-align: center;
+}
+.breakdowntitle {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  text-decoration: underline;
+}
+.monthselector {
+  display: flex;
+  justify-content: center;
+}
+.expensetable {
+  margin-left: auto;
+  margin-right: auto;
+}
+button {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #60a3bc;
+  padding: 5px;
+  border-radius: 50px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+  margin-left: 5px;
+}
 
