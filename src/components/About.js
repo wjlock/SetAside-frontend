@@ -3,14 +3,6 @@ import React from "react";
 const About = () => {
   return (
     <div>
-      <h1>About</h1>
-      <p>This is about us...</p>
-      <p>
-        We wanted to make an everyday tracker for your finances. A quick and
-        interactional App that can show you how your personalized goals are
-        going with a weekly or monthly update. We have intuitive graphs and
-        tables to make it easy and fun to show your progress and SetAside.
-      </p>
       <div className="container">
         <div className="row">
           <div className="col">
@@ -77,7 +69,7 @@ const About = () => {
           </div>
           {/* corey */}
           <div className="col">
-              <p>Cory Wilson</p>
+              <p>Corey Wilson</p>
             <a href="https://github.com/CoreyWilson319" className="github">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
