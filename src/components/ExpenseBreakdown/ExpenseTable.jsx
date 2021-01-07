@@ -139,6 +139,7 @@ const ExpenseTable = ({results = undefined, expenseData = [{}]}) => {
         <td>{expenseData.miscellaneous - results?.misc || expenseData.miscellaneous - 0}</td>
       </tr>
     </table>
+    </table>
   )
 }
 
