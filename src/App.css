@@ -220,9 +220,11 @@ a {
 #expenseBreakdownTable {
   margin-left: 20%;
 }
+
 .breakDown{
   font-size: large;
 }
+
 .linkedin{
   color: rgb(14, 98, 166);
   
@@ -238,6 +240,7 @@ a {
 .row{
   text-align: center;
 }
+
 
 td {
   display: flex inline;
