@@ -3,6 +3,8 @@ import { startCase } from 'lodash';
 
 const ExpenseTable = ({results = undefined, expenseData = [{}]}) => {
   return (
+
+    <table className="breakDown">
     <table className="expensetable">
       <tr>
         <th></th>
