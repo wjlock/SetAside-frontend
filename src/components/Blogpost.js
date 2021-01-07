@@ -8,18 +8,15 @@ const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 class Blogpost extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       author: "",
       title: "",
       content: "",
     };
   }
-
   handleInput = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
   submitForm = () => {
     axios.post(`${REACT_APP_SERVER_URL}/api/blogPosts/new`, {
       method: "POST",
@@ -34,7 +31,6 @@ class Blogpost extends Component {
       });
     });
   };
-
   render() {
     return (
       <div class="blogPost">
@@ -46,25 +42,21 @@ class Blogpost extends Component {
           value={this.state.author}
           handler={this.handleInput}
         />
-
         <FormField
           labelLink="title"
           displayLabel="Title:"
           value={this.state.title}
           handler={this.handleInput}
         />
-
         <FormField
           labelLink="content"
           displayLabel="Write Something:"
           value={this.state.content}
           handler={this.handleInput}
         />
-
         <input type="submit" onClick={this.submitForm} value="Create!" />
       </div>
     );
   }
 }
-
 export default withRouter(Blogpost);

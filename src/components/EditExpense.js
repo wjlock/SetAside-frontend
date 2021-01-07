@@ -37,7 +37,6 @@ const EditExpense = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("test");
     const data = {
       year: expenseYear,
       amount: expenseAmount,
@@ -89,7 +88,6 @@ const EditExpense = (props) => {
   });
 
   const namesList = categories[expenseCategory];
-  console.log(namesList);
 
   const createNames = namesList?.map(function (name) {
     return <option value={name}>{name}</option>;

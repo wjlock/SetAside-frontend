@@ -1,7 +1,7 @@
 import React, { useState, useEffect }  from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Route, Switch, Redirect } from "react-router-dom";
+
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 // import ExpenseEdit from "./components/ExpenseEdit";
@@ -39,7 +39,7 @@ const Profile = (props) => {
             </div>
             <div>
                 <h1 id="profileHeader">My Expenses</h1>
-                <div class="expenses">
+                <div className="expenses">
                     {expenses.map((expense, index) => 
                     <h3 id="expensesText" key={index}> {expense.name}: $
                     {expense.amount}{"....................... "}
@@ -47,7 +47,7 @@ const Profile = (props) => {
                     {expense.day}, {" "}
                     {expense.year}{"           "} 
                     <Link to={`/editexpense/${expense._id}`} id="editButton">⚙︎</Link> 
-                    <button class="btn btn-primary btn-lg btn-block" id="deleteButton" type="submit" onClick={() => handleDelete(expense._id)}>X</button> 
+                    <button className="btn btn-primary btn-lg btn-block" id="deleteButton" type="submit" onClick={() => handleDelete(expense._id)}>X</button> 
                     </h3>
                     )}
                 </div>

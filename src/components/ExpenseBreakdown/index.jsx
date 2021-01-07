@@ -10,8 +10,6 @@ const ExpenseBreakdown = () => {
   const [results, setResults] = useState(undefined);
   const [expenseData, setExpenseData] = useState(undefined);
 
-  console.log("Expense Data => ", expenseData);
-
   const handleExpenseMonth = (e) => {
     setExpenseMonth(e.target.value);
   };
@@ -28,7 +26,6 @@ const ExpenseBreakdown = () => {
       .get(`${process.env.REACT_APP_SERVER_URL}/api/users/current`)
       .then(({ data }) => {
         setExpenseData({ ...data });
-        console.log(data);
       });
       
     const filteredResults = data

@@ -76,11 +76,7 @@ a {
   color: rgb(224, 51, 51);
 }
 
-/* .entertainment{
-  padding-right: 15px;
-  padding-left: 5px;
-  font-size: 13px;
-} */
+
 
 #deleteButton :hover {
   cursor: pointer;
@@ -155,6 +151,29 @@ a {
   text-decoration: underline;
 }
 
+.totalSpending{
+  padding-right: 1px;
+  padding-left: 5px;
+  font-size: 12px;
+}
+.transportation{
+  padding-right: 14.8px;
+  padding-left: 5px;
+  font-size: 12px;
+}
+.daily{
+  padding-right: 67.3px;
+  padding-left: 5px;
+  font-size: 12px;
+}
+.home{
+  padding-right: 60.6px;
+  padding-left: 5px;
+  font-size: 12px;
+}
+.entertainment{
+  padding-right: 16px;
+}
 .totalSpending,
 .home,
 .entertainment,
@@ -164,7 +183,6 @@ a {
   padding-left: 5px;
   font-size: 12px;
 }
-
 #dashboardPieChart {
   text-align: center;
   text-decoration: underline;
@@ -202,6 +220,25 @@ a {
 #expenseBreakdownTable {
   margin-left: 20%;
 }
+.breakDown{
+  font-size: large;
+}
+.linkedin{
+  color: rgb(14, 98, 166);
+  
+}
+
+.github{
+  color:rgb(138, 138, 138);
+  padding-right: 3px;
+}
+.github:hover {
+  color: black;
+}
+.row{
+  text-align: center;
+}
+
 td {
   display: flex inline;
   text-align: center;
@@ -232,3 +269,4 @@ button {
   transition: all 0.4s ease 0s;
   margin-left: 5px;
 }
+
