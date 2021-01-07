@@ -132,7 +132,7 @@ const Dashboard = () => {
         const transportationWidth = sumExpenses(expensesGroupedByCategory.Transportation) / sum(transportation) * 100
 
         const colorMap = {
-            'Rent': '#E38627',
+            'Mortgage/Rent': '#E38627',
             'Utilities': '#C13C37',
             'Phone': '#6A2135',
             'Internet': '#194D33',
@@ -144,15 +144,15 @@ const Dashboard = () => {
             'Pet Care': '#6c757d',
             'Gas': '#28a745',
             'Car Insurance': '#dc3545',
-            'Car Repairs': '#fff',
+            'Repairs': '#fff',
             'Car Wash': '#e83e8c',
             'Parking': '#6f42c1',
             'Public Transportation': '#007bff',
-            'Ride Share': '#20c997',
+            'Taxi/Uber': '#20c997',
             'Television': '#C787D0',
             'Movies': '#D08E87',
             'Concerts': '#D0C387',
-            'Miscellaneous': '#dc3545'
+            'Misc': '#dc3545'
         }
         let pieData = []
          for(let expensesName of Object.keys(expensesGroupByName)){
