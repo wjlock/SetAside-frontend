@@ -152,7 +152,7 @@ const Dashboard = () => {
             'Television': '#C787D0',
             'Movies': '#D08E87',
             'Concerts': '#D0C387',
-            'Misc': '#dc3545'
+            'Misc': '#ABD087'
         }
         let pieData = []
          for(let expensesName of Object.keys(expensesGroupByName)){
